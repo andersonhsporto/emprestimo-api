@@ -1,29 +1,33 @@
 package dev.anderson.emprestimoapi.entities;
 
 import dev.anderson.emprestimoapi.types.Membership;
+import org.hibernate.validator.constraints.br.CPF;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import org.hibernate.validator.constraints.br.CPF;
-
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
-public class PeopleEntity {
+public class LoanEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
     @CPF
-    private String cpf;
+    private String CPFClient;
 
-    private String telephone;
+    private BigDecimal startValue;
 
-    private String address;
-    private BigDecimal salary;
+    private BigDecimal endValue;
+
     private Membership membership;
+
+    private LocalDateTime startDateTime;
+
+    private LocalDateTime endDateTime;
+
 }

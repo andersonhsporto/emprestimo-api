@@ -1,14 +1,14 @@
 package dev.anderson.emprestimoapi.service;
 
-import dev.anderson.emprestimoapi.repositories.PeopleRepository;
+import dev.anderson.emprestimoapi.repositories.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class PeopleService {
+public class ClientService {
 
-    private PeopleRepository peopleRepository;
+    private ClientRepository clientRepository;
 
 
 }
