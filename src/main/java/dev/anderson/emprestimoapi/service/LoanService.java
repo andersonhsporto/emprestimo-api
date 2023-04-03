@@ -68,7 +68,6 @@ public class LoanService {
     public List<LoanDto> getAllLoans(String cpf) throws Exception {
         if (clientRepository.existsByCpf(cpf)) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
-            System.out.println(clientEntity.getLoans());
 
             return loanMapper.toDtoList(clientEntity.getLoans());
         }
