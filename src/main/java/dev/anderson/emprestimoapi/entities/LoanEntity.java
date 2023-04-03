@@ -36,6 +36,28 @@ public class LoanEntity {
     private LocalDateTime endDateTime;
 
     @ManyToOne
+    @JoinColumn
     private ClientEntity client;
 
+    public void updateEndValue() {
+        endValue = membership.getMembershipStatus(startValue, getNumberOfLoans());
+    }
+
+    private Integer getNumberOfLoans() {
+        return client.getLoans().size();
+    }
+
+    @Override
+    public String toString() {
+        return "LoanEntity{" +
+                "id=" + id +
+                ", CPFClient='" + CPFClient + '\'' +
+                ", startValue=" + startValue +
+                ", endValue=" + endValue +
+                ", membership=" + membership +
+                ", startDateTime=" + startDateTime +
+                ", endDateTime=" + endDateTime +
+                ", client=" + client +
+                '}';
+    }
 }
