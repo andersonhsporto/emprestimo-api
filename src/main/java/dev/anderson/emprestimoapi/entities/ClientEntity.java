@@ -38,28 +38,38 @@ public class ClientEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private AddressEntity address;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<LoanEntity> loans;
 
-    public void update(ClientEntity client) {
-        if (client.name != null)
-            this.name = client.name;
-        if (client.cpf != null)
-            this.cpf = client.cpf;
-        if (client.telephone != null)
-            this.telephone = client.telephone;
-        if (client.salary != null)
-            this.salary = client.salary;
-        if (client.address != null)
-            this.address = client.address;
-    }
+    public boolean isEligibleForLoan(BigDecimal startValue) {
+        BigDecimal loanTotal = getLoanValue();
+        BigDecimal maxLoanValue = getMaxLoanValue();
 
-    public Integer getNumberOfLoans() {
-        return loans.size();
+        if (loanTotal.add(startValue).compareTo(maxLoanValue) > 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public void addLoan(LoanEntity loan) {
         loans.add(loan);
+    }
+
+    private BigDecimal getLoanValue() {
+        BigDecimal loanValue = BigDecimal.ZERO;
+
+        if (loans.isEmpty()) {
+            return loanValue;
+        }
+        for (LoanEntity loan : loans) {
+            loanValue = loanValue.add(loan.getEndValue());
+        }
+        return loanValue;
+    }
+
+    private BigDecimal getMaxLoanValue() {
+        return salary.multiply(BigDecimal.valueOf(10));
     }
 
     @Override
