@@ -5,7 +5,6 @@ import dev.anderson.emprestimoapi.types.Membership;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

@@ -1,10 +1,8 @@
 package dev.anderson.emprestimoapi.controller;
 
-import dev.anderson.emprestimoapi.dto.ClientDto;
 import dev.anderson.emprestimoapi.dto.LoanDto;
 import dev.anderson.emprestimoapi.service.LoanService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
