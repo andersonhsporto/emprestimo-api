@@ -43,7 +43,9 @@ public class ClientController {
 
     @PutMapping("/{cpf}")
     @ResponseStatus(HttpStatus.OK)
-    public String updateClientByCpf(@PathVariable String cpf, @Valid @RequestBody ClientDto clientDto) {
+    public String updateClientByCpf(
+            @PathVariable String cpf,
+            @Valid @RequestBody ClientDto clientDto) throws Exception {
         return clientService.updateClientByCpf(cpf, clientDto);
     }
 }
