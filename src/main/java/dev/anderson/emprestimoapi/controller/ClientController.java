@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -20,5 +21,29 @@ public class ClientController {
     @ResponseStatus(HttpStatus.CREATED)
     public String makeClient(@Valid @RequestBody ClientDto clientDto) {
         return clientService.makeClient(clientDto);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<ClientDto> getAllClients() {
+        return clientService.getAllClients();
+    }
+
+    @GetMapping("/{cpf}")
+    @ResponseStatus(HttpStatus.OK)
+    public ClientDto getClientByCpf(@PathVariable String cpf) {
+        return clientService.getClientByCpf(cpf);
+    }
+
+    @DeleteMapping("/{cpf}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteClientByCpf(@PathVariable String cpf) {
+        clientService.deleteClientByCpf(cpf);
+    }
+
+    @PutMapping("/{cpf}")
+    @ResponseStatus(HttpStatus.OK)
+    public String updateClientByCpf(@PathVariable String cpf, @Valid @RequestBody ClientDto clientDto) {
+        return clientService.updateClientByCpf(cpf, clientDto);
     }
 }

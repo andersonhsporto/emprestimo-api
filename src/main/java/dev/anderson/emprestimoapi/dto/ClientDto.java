@@ -43,14 +43,14 @@ public class ClientDto {
 
     @Override
     public String toString() {
-        return "ClientDto{" +
-                "name='" + name + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", salary=" + salary +
-                ", street='" + street + '\'' +
-                ", number='" + number + '\'' +
-                ", zipCode='" + zipCode + '\'' +
-                '}';
+        return "ClientDto { " +
+                "name = '" + name + '\'' +
+                ", cpf = '" + cpf + '\'' +
+                ", telephone = '" + telephone + '\'' +
+                ", salary = " + salary +
+                ", street = '" + street + '\'' +
+                ", number = '" + number + '\'' +
+                ", zipCode = '" + zipCode + '\'' +
+                " } ";
     }
 }

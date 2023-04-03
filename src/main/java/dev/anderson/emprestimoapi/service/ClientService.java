@@ -7,6 +7,9 @@ import dev.anderson.emprestimoapi.repositories.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class ClientService {
@@ -17,6 +20,30 @@ public class ClientService {
 
     public String makeClient(ClientDto clientDto) {
         ClientEntity clientEntity = clientMapper.toModel(clientDto);
+        clientRepository.save(clientEntity);
+        return clientDto.toString();
+    }
+
+    public List<ClientDto> getAllClients() {
+        return clientRepository.findAll()
+                .stream()
+                .map(clientMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public ClientDto getClientByCpf(String cpf) {
+        ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+        return clientMapper.toDto(clientEntity);
+    }
+
+    public void deleteClientByCpf(String cpf) {
+        ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+        clientRepository.delete(clientEntity);
+    }
+
+    public String updateClientByCpf(String cpf, ClientDto clientDto) {
+        ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+        clientEntity.update(clientMapper.toModel(clientDto));
         clientRepository.save(clientEntity);
         return clientDto.toString();
     }

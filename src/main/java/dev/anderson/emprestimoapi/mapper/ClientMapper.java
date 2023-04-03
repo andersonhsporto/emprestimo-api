@@ -16,4 +16,9 @@ public interface ClientMapper {
     @Mapping(source = "number", target = "address.number")
     @Mapping(source = "zipCode", target = "address.zipCode")
     ClientEntity toModel(ClientDto clientDto);
+
+    @Mapping(source = "address.street", target = "street")
+    @Mapping(source = "address.number", target = "number")
+    @Mapping(source = "address.zipCode", target = "zipCode")
+    ClientDto toDto(ClientEntity clientEntity);
 }

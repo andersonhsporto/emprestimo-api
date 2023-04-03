@@ -30,6 +30,14 @@ public class ClientEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private AddressEntity address;
 
+    public void update(ClientEntity client) {
+        this.name = client.name;
+        this.cpf = client.cpf;
+        this.telephone = client.telephone;
+        this.salary = client.salary;
+        this.address = client.address;
+    }
+
     @Override
     public String toString() {
         return "ClientEntity{" +
