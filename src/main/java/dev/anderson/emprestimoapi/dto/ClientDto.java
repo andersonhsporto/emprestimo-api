@@ -16,8 +16,8 @@ public class ClientDto {
     @NotEmpty(message = "O campo 'nome' é obrigatório")
     private String name;
 
-    @JsonProperty("cpf")
-    @CPF
+    @JsonProperty("CPF")
+    @CPF(message = "O campo 'CPF' deve estar no formato '999.999.999-99'")
     private String cpf;
 
     @JsonProperty("telefone")
@@ -36,9 +36,9 @@ public class ClientDto {
     @NotEmpty(message = "O campo 'numero' é obrigatório")
     private String number;
 
-    @JsonProperty("cep")
-    @NotEmpty(message = "O campo 'cep' é obrigatório")
-    @Pattern(regexp = "\\d{5}-\\d{3}", message = "O campo 'cep' deve estar no formato '99999-999'")
+    @JsonProperty("CEP")
+    @NotEmpty(message = "O campo 'CEP' é obrigatório")
+    @Pattern(regexp = "\\d{5}-\\d{3}", message = "O campo 'CEP' deve estar no formato '99999-999'")
     private String zipCode;
 
     @Override
