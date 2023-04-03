@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ClientNotFoundException extends Exception {
     public ClientNotFoundException(String cpf) {
-        super("Client not found with CPF " + cpf);
+        super("Cliente com o CPF: " + cpf + " não foi encontrado");
     }
 }
