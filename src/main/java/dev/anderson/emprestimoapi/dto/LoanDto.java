@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @Data
 public class LoanDto {
 
+    private Long id;
+
     @JsonProperty("CPFCliente")
     @CPF
     private String CPFClient;
@@ -26,6 +28,7 @@ public class LoanDto {
     @JsonProperty("dataFinal")
     private LocalDateTime endDateTime;
 
+    @JsonProperty("relacionamento")
     private Membership membership;
 
     private BigDecimal endValue;
