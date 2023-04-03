@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 
 @Data
@@ -34,6 +36,7 @@ public class ClientDto {
     @JsonProperty("CEP")
     @Pattern(regexp = "\\d{5}-\\d{3}", message = "O campo 'CEP' deve estar no formato '99999-999'")
     private String zipCode;
+
 
     @Override
     public String toString() {
