@@ -12,6 +12,7 @@ public interface ClientMapper {
     ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "address", ignore = true)
+    @Mapping(target = "loans", ignore = true)
     @Mapping(source = "street", target = "address.street")
     @Mapping(source = "number", target = "address.number")
     @Mapping(source = "zipCode", target = "address.zipCode")
