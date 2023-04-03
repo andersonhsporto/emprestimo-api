@@ -31,13 +31,13 @@ public class ClientController {
 
     @GetMapping("/{cpf}")
     @ResponseStatus(HttpStatus.OK)
-    public ClientDto getClientByCpf(@PathVariable String cpf) {
+    public ClientDto getClientByCpf(@PathVariable String cpf) throws Exception {
         return clientService.getClientByCpf(cpf);
     }
 
     @DeleteMapping("/{cpf}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteClientByCpf(@PathVariable String cpf) {
+    public void deleteClientByCpf(@PathVariable String cpf) throws Exception {
         clientService.deleteClientByCpf(cpf);
     }
 

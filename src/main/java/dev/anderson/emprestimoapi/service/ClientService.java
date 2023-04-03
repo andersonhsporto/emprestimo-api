@@ -2,6 +2,7 @@ package dev.anderson.emprestimoapi.service;
 
 import dev.anderson.emprestimoapi.dto.ClientDto;
 import dev.anderson.emprestimoapi.entities.ClientEntity;
+import dev.anderson.emprestimoapi.exceptions.ClientNotFoundException;
 import dev.anderson.emprestimoapi.mapper.ClientMapper;
 import dev.anderson.emprestimoapi.repositories.ClientRepository;
 import lombok.AllArgsConstructor;
@@ -31,21 +32,31 @@ public class ClientService {
                 .collect(Collectors.toList());
     }
 
-    public ClientDto getClientByCpf(String cpf) {
-        ClientEntity clientEntity = clientRepository.findByCpf(cpf);
-        return clientMapper.toDto(clientEntity);
+    public ClientDto getClientByCpf(String cpf) throws ClientNotFoundException {
+        if (clientRepository.existsByCpf(cpf)) {
+            ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+
+            return clientMapper.toDto(clientEntity);
+        }
+        throw new ClientNotFoundException("Cliente não encontrado");
     }
 
-    public void deleteClientByCpf(String cpf) {
-        ClientEntity clientEntity = clientRepository.findByCpf(cpf);
-        clientRepository.delete(clientEntity);
+    public void deleteClientByCpf(String cpf) throws ClientNotFoundException {
+        if (clientRepository.existsByCpf(cpf)) {
+            ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+            clientRepository.delete(clientEntity);
+        }
+        throw new ClientNotFoundException("Cliente não encontrado");
     }
 
-    public String updateClientByCpf(String cpf, ClientDto clientDto) {
-        ClientEntity clientEntity = clientRepository.findByCpf(cpf);
-        clientEntity.update(clientMapper.toModel(clientDto));
-        clientRepository.save(clientEntity);
-        return clientDto.toString();
+    public String updateClientByCpf(String cpf, ClientDto clientDto) throws Exception {
+        if (clientRepository.existsByCpf(cpf)) {
+            ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+            clientEntity.update(clientMapper.toModel(clientDto));
+            clientRepository.save(clientEntity);
+            return clientDto.toString();
+        }
+        throw new ClientNotFoundException("Cliente não encontrado");
     }
 
 
