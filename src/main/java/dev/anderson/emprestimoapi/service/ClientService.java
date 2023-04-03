@@ -21,6 +21,7 @@ public class ClientService {
 
     public String makeClient(ClientDto clientDto) {
         ClientEntity clientEntity = clientMapper.toModel(clientDto);
+
         clientRepository.save(clientEntity);
         return clientDto.toString();
     }
@@ -44,6 +45,7 @@ public class ClientService {
     public void deleteClientByCpf(String cpf) throws ClientNotFoundException {
         if (clientRepository.existsByCpf(cpf)) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+
             clientRepository.delete(clientEntity);
         }
         throw new ClientNotFoundException("Cliente não encontrado");
@@ -52,6 +54,7 @@ public class ClientService {
     public String updateClientByCpf(String cpf, ClientDto clientDto) throws Exception {
         if (clientRepository.existsByCpf(cpf)) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+
             clientEntity.update(clientMapper.toModel(clientDto));
             clientRepository.save(clientEntity);
             return clientDto.toString();
