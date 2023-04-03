@@ -4,11 +4,16 @@ import dev.anderson.emprestimoapi.dto.LoanDto;
 import dev.anderson.emprestimoapi.entities.ClientEntity;
 import dev.anderson.emprestimoapi.entities.LoanEntity;
 import dev.anderson.emprestimoapi.exceptions.ClientNotFoundException;
+import dev.anderson.emprestimoapi.exceptions.LoanNotFoundException;
+import dev.anderson.emprestimoapi.exceptions.MaxLoanException;
 import dev.anderson.emprestimoapi.mapper.LoanMapper;
 import dev.anderson.emprestimoapi.repositories.ClientRepository;
 import dev.anderson.emprestimoapi.repositories.LoanRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -20,20 +25,64 @@ public class LoanService {
 
     private LoanMapper loanMapper;
 
-    public String makeLoan(String cpf, LoanDto loanDto) throws ClientNotFoundException {
+    public String makeLoan(String cpf, LoanDto loanDto) throws Exception {
         if (clientRepository.existsByCpf(cpf)) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
-            LoanEntity loanEntity = loanMapper.toModel(loanDto);
+            BigDecimal startValue = loanDto.getStartValue();
 
-            // TODO: implementar regra de negócio para cálculo do valor final do empréstimo
-
-            clientEntity.addLoan(loanEntity);
-            clientRepository.save(clientEntity);
-            return loanDto.toString();
+            if (clientEntity.isEligibleForLoan(startValue)) {
+                return persistLoan(clientEntity, loanDto);
+            } else {
+                throw new MaxLoanException(clientEntity.getCpf());
+            }
         }
-        throw new ClientNotFoundException("Cliente não encontrado");
-
+        throw new ClientNotFoundException(cpf);
     }
 
+    public void deleteLoan(String cpf, Long id) throws Exception {
+        if (clientRepository.existsByCpf(cpf)) {
+            if (loanRepository.existsByIdAndAndCPFClient(id, cpf)) {
+                LoanEntity loanEntity = loanRepository.findById(id).get();
+
+                loanRepository.delete(loanEntity);
+            } else {
+                throw new LoanNotFoundException(cpf, id);
+            }
+        }
+        throw new ClientNotFoundException(cpf);
+    }
+
+    public LoanDto getLoan(String cpf, Long id) throws Exception {
+        if (clientRepository.existsByCpf(cpf)) {
+            if (loanRepository.existsByIdAndAndCPFClient(id, cpf)) {
+                LoanEntity loanEntity = loanRepository.findById(id).get();
+
+                return loanMapper.toDto(loanEntity);
+            } else {
+                throw new LoanNotFoundException(cpf, id);
+            }
+        }
+        throw new ClientNotFoundException(cpf);
+    }
+
+    public List<LoanDto> getAllLoans(String cpf) throws Exception {
+        if (clientRepository.existsByCpf(cpf)) {
+            ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+            System.out.println(clientEntity.getLoans());
+
+            return loanMapper.toDtoList(clientEntity.getLoans());
+        }
+        throw new ClientNotFoundException(cpf);
+    }
+
+    private String persistLoan(ClientEntity clientEntity, LoanDto loanDto) {
+        LoanEntity loanEntity = loanMapper.toModel(loanDto);
+
+        loanEntity.setClient(clientEntity);
+        loanEntity.updateEndValue();
+        clientEntity.addLoan(loanEntity);
+        loanRepository.save(loanEntity);
+        return loanEntity.toString();
+    }
 
 }
