@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -30,12 +31,23 @@ public class ClientEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private AddressEntity address;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<LoanEntity> loans;
+
     public void update(ClientEntity client) {
         this.name = client.name;
         this.cpf = client.cpf;
         this.telephone = client.telephone;
         this.salary = client.salary;
         this.address = client.address;
+    }
+
+    public Integer getNumberOfLoans() {
+        return loans.size();
+    }
+
+    public void addLoan(LoanEntity loan) {
+        loans.add(loan);
     }
 
     @Override
