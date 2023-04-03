@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Data
 public class ClientDto {
 
-    @JsonProperty("name")
+    @JsonProperty("nome")
     @NotEmpty(message = "O campo 'nome' é obrigatório")
     private String name;
 
@@ -20,25 +20,25 @@ public class ClientDto {
     @CPF
     private String cpf;
 
-    @JsonProperty("telephone")
+    @JsonProperty("telefone")
     @NotEmpty(message = "O campo 'telefone' é obrigatório")
     private String telephone;
 
-    @JsonProperty("salary")
-    @NotNull(message = "O campo 'salário' é obrigatório")
+    @JsonProperty("salario")
+    @NotNull(message = "O campo 'salario' é obrigatório")
     private BigDecimal salary;
 
-    @JsonProperty("street")
+    @JsonProperty("rua")
     @NotEmpty(message = "O campo 'rua' é obrigatório")
     private String street;
 
-    @JsonProperty("number")
-    @NotEmpty(message = "O campo 'número' é obrigatório")
+    @JsonProperty("numero")
+    @NotEmpty(message = "O campo 'numero' é obrigatório")
     private String number;
 
-    @JsonProperty("zipCode")
-    @NotEmpty(message = "O campo 'CEP' é obrigatório")
-    @Pattern(regexp = "\\d{5}-\\d{3}", message = "O campo 'CEP' deve estar no formato '99999-999'")
+    @JsonProperty("cep")
+    @NotEmpty(message = "O campo 'cep' é obrigatório")
+    @Pattern(regexp = "\\d{5}-\\d{3}", message = "O campo 'cep' deve estar no formato '99999-999'")
     private String zipCode;
 
     @Override
