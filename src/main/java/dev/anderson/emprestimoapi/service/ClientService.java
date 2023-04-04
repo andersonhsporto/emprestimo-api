@@ -19,11 +19,11 @@ public class ClientService {
 
     private ClientMapper clientMapper;
 
-    public String makeClient(ClientDto clientDto) {
+    public ClientDto makeClient(ClientDto clientDto) {
         ClientEntity clientEntity = clientMapper.toModel(clientDto);
 
         clientRepository.save(clientEntity);
-        return clientDto.toString();
+        return clientMapper.toDto(clientEntity);
     }
 
     public List<ClientDto> getAllClients() {
@@ -38,8 +38,9 @@ public class ClientService {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
 
             return clientMapper.toDto(clientEntity);
+        } else {
+            throw new ClientNotFoundException(cpf);
         }
-        throw new ClientNotFoundException("Cliente não encontrado");
     }
 
     public void deleteClientByCpf(String cpf) throws ClientNotFoundException {
@@ -47,20 +48,21 @@ public class ClientService {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
 
             clientRepository.delete(clientEntity);
+        } else {
+            throw new ClientNotFoundException(cpf);
         }
-        throw new ClientNotFoundException("Cliente não encontrado");
     }
 
-    public String updateClientByCpf(String cpf, ClientDto clientDto) throws Exception {
+    public ClientDto updateClientByCpf(String cpf, ClientDto clientDto) throws Exception {
         if (clientRepository.existsByCpf(cpf)) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
 
             clientMapper.updateClientEntity(clientDto, clientEntity);
             clientRepository.save(clientEntity);
-            return clientDto.toString();
+            return clientMapper.toDto(clientEntity);
+        } else {
+            throw new ClientNotFoundException(cpf);
         }
-        throw new ClientNotFoundException("Cliente não encontrado");
     }
-
 
 }
