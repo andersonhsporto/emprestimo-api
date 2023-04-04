@@ -30,24 +30,10 @@ public class ClientDto {
     private String street;
 
     @JsonProperty("numero")
-    @Digits(integer = 5, fraction = 0, message = "O campo 'numero' deve ser um número inteiro")
+    @Digits(integer = 10, fraction = 0, message = "O campo 'numero' deve ser um número inteiro")
     private String number;
 
     @JsonProperty("CEP")
     @Pattern(regexp = "\\d{5}-\\d{3}", message = "O campo 'CEP' deve estar no formato '99999-999'")
     private String zipCode;
-
-
-    @Override
-    public String toString() {
-        return "ClientDto { " +
-                "name = '" + name + '\'' +
-                ", cpf = '" + cpf + '\'' +
-                ", telephone = '" + telephone + '\'' +
-                ", salary = " + salary +
-                ", street = '" + street + '\'' +
-                ", number = '" + number + '\'' +
-                ", zipCode = '" + zipCode + '\'' +
-                " } ";
-    }
 }
