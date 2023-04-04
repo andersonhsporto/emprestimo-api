@@ -25,16 +25,15 @@ public class LoanService {
 
     private LoanMapper loanMapper;
 
-    public String makeLoan(String cpf, LoanDto loanDto) throws Exception {
+    public LoanDto makeLoan(String cpf, LoanDto loanDto) throws Exception {
         if (clientRepository.existsByCpf(cpf)) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
             BigDecimal startValue = loanDto.getStartValue();
 
             if (clientEntity.isEligibleForLoan(startValue)) {
                 return persistLoan(clientEntity, loanDto);
-            } else {
-                throw new MaxLoanException(clientEntity.getCpf());
             }
+            throw new MaxLoanException(clientEntity.getCpf());
         }
         throw new ClientNotFoundException(cpf);
     }
@@ -42,12 +41,14 @@ public class LoanService {
     public void deleteLoan(String cpf, Long id) throws Exception {
         if (clientRepository.existsByCpf(cpf)) {
             if (loanRepository.existsByIdAndAndCPFClient(id, cpf)) {
+                ClientEntity clientEntity = clientRepository.findByCpf(cpf);
                 LoanEntity loanEntity = loanRepository.findById(id).get();
 
+                clientEntity.removeLoan(loanEntity);
                 loanRepository.delete(loanEntity);
-            } else {
-                throw new LoanNotFoundException(cpf, id);
+                return;
             }
+            throw new LoanNotFoundException(cpf, id);
         }
         throw new ClientNotFoundException(cpf);
     }
@@ -58,9 +59,8 @@ public class LoanService {
                 LoanEntity loanEntity = loanRepository.findById(id).get();
 
                 return loanMapper.toDto(loanEntity);
-            } else {
-                throw new LoanNotFoundException(cpf, id);
             }
+            throw new LoanNotFoundException(cpf, id);
         }
         throw new ClientNotFoundException(cpf);
     }
@@ -74,14 +74,14 @@ public class LoanService {
         throw new ClientNotFoundException(cpf);
     }
 
-    private String persistLoan(ClientEntity clientEntity, LoanDto loanDto) {
+    private LoanDto persistLoan(ClientEntity clientEntity, LoanDto loanDto) {
         LoanEntity loanEntity = loanMapper.toModel(loanDto);
 
         loanEntity.setClient(clientEntity);
         loanEntity.updateEndValue();
         clientEntity.addLoan(loanEntity);
         loanRepository.save(loanEntity);
-        return loanEntity.toString();
+        return loanMapper.toDto(loanEntity);
     }
 
 }
