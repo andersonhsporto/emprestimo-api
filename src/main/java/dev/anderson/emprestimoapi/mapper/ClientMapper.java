@@ -8,6 +8,8 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ClientMapper {
 
@@ -32,4 +34,6 @@ public interface ClientMapper {
     @Mapping(source = "number", target = "address.number")
     @Mapping(source = "zipCode", target = "address.zipCode")
     void updateClientEntity(ClientDto clientDto, @MappingTarget ClientEntity clientEntity);
+
+    List<ClientDto> toDtoList(List<ClientEntity> clientEntityList);
 }

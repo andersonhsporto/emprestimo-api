@@ -31,10 +31,9 @@ public class ClientService {
     }
 
     public List<ClientDto> getAllClients() {
-        return clientRepository.findAll()
-                .stream()
-                .map(clientMapper::toDto)
-                .collect(Collectors.toList());
+        List<ClientEntity> clientEntityList = clientRepository.findAll();
+
+        return clientMapper.toDtoList(clientEntityList);
     }
 
     public ClientDto getClientByCpf(String cpf) throws ClientNotFoundException {
