@@ -1,0 +1,11 @@
+services:
+  app:
+    image: 'emprestimo-api-v1:latest'
+    container_name: emprestimo-api
+    build:
+      context: .
+    ports:
+      - '8080:8080'
+
+volumes:
+  volumes:
