@@ -42,7 +42,7 @@ public class ClientEntity {
 
     public boolean isEligibleForLoan(BigDecimal startValue) {
         BigDecimal loanTotal = getLoanValue();
-        BigDecimal maxLoanValue = getMaxLoanValue();
+        BigDecimal maxLoanValue = getClientLoanLimit();
 
         if (loanTotal.add(startValue).compareTo(maxLoanValue) > 0) {
             return false;
@@ -71,7 +71,7 @@ public class ClientEntity {
         return loanValue;
     }
 
-    private BigDecimal getMaxLoanValue() {
+    private BigDecimal getClientLoanLimit() {
         return salary.multiply(BigDecimal.valueOf(10));
     }
 }
