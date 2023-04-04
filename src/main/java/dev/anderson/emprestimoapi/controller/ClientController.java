@@ -19,7 +19,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String makeClient(@Valid @RequestBody ClientDto clientDto) {
+    public ClientDto makeClient(@Valid @RequestBody ClientDto clientDto) {
         return clientService.makeClient(clientDto);
     }
 
@@ -43,7 +43,7 @@ public class ClientController {
 
     @PutMapping("/{cpf}")
     @ResponseStatus(HttpStatus.OK)
-    public String updateClientByCpf(
+    public ClientDto updateClientByCpf(
             @PathVariable String cpf,
             @Valid @RequestBody ClientDto clientDto) throws Exception {
         return clientService.updateClientByCpf(cpf, clientDto);
