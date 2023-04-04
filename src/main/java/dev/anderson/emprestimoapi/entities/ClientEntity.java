@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -26,7 +25,7 @@ public class ClientEntity {
     @NotEmpty(message = "O campo 'nome' é obrigatório")
     private String name;
 
-    @CPF(message = "O campo 'CPF' deve estar no formato '999.999.999-99'")
+    @NotEmpty(message = "O campo 'CPF' é obrigatório")
     private String cpf;
 
     @NotEmpty(message = "O campo 'telefone' é obrigatório")
@@ -56,6 +55,10 @@ public class ClientEntity {
         loans.add(loan);
     }
 
+    public void removeLoan(LoanEntity loan) {
+        loans.remove(loan);
+    }
+
     private BigDecimal getLoanValue() {
         BigDecimal loanValue = BigDecimal.ZERO;
 
@@ -70,17 +73,5 @@ public class ClientEntity {
 
     private BigDecimal getMaxLoanValue() {
         return salary.multiply(BigDecimal.valueOf(10));
-    }
-
-    @Override
-    public String toString() {
-        return "ClientEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", salary=" + salary +
-                ", address=" + address +
-                '}';
     }
 }
