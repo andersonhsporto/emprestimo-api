@@ -19,7 +19,7 @@ public class LoanController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String makeLoan(@PathVariable String cpf, @Valid @RequestBody LoanDto loanDto) throws Exception {
+    public LoanDto makeLoan(@PathVariable String cpf, @Valid @RequestBody LoanDto loanDto) throws Exception {
         return loanService.makeLoan(cpf, loanDto);
     }
 
