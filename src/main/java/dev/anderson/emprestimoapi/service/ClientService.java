@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -56,7 +55,7 @@ public class ClientService {
         }
     }
 
-    public ClientDto updateClientByCpf(String cpf, ClientDto clientDto) throws Exception {
+    public ClientDto updateClientByCpf(String cpf, ClientDto clientDto) throws ClientNotFoundException {
         if (clientRepository.existsByCpf(cpf)) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
 
