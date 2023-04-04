@@ -4,10 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.anderson.emprestimoapi.types.Membership;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 public class LoanDto {
@@ -15,33 +18,28 @@ public class LoanDto {
     private Long id;
 
     @JsonProperty("CPFCliente")
+    @NotEmpty(message = "O campo 'CPFCliente' é obrigatório")
     @CPF
     private String CPFClient;
 
     @JsonProperty("ValorInicial")
     @NotNull(message = "O campo 'ValorInicial' é obrigatório")
+    @DecimalMin(value = "0.0", inclusive = false, message = "O campo 'ValorInicial' deve ser maior que 0")
     private BigDecimal startValue;
 
     @JsonProperty("dataInicio")
-    private LocalDateTime startDateTime;
+    @NotNull(message = "O campo 'dataInicio' é obrigatório")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
 
     @JsonProperty("dataFinal")
-    private LocalDateTime endDateTime;
+    @NotNull(message = "O campo 'dataFinal' é obrigatório")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
 
     @JsonProperty("relacionamento")
+    @NotNull(message = "O campo 'relacionamento' é obrigatório")
     private Membership membership;
 
     private BigDecimal endValue;
-
-    @Override
-    public String toString() {
-        return "LoanDto{" +
-                "CPFClient='" + CPFClient + '\'' +
-                ", startValue=" + startValue +
-                ", startDateTime=" + startDateTime +
-                ", endDateTime=" + endDateTime +
-                ", membership=" + membership +
-                ", endValue=" + endValue +
-                '}';
-    }
 }
