@@ -1,5 +1,6 @@
 package dev.anderson.emprestimoapi.exceptions.handler;
 
+import dev.anderson.emprestimoapi.exceptions.ClientDuplicatedException;
 import dev.anderson.emprestimoapi.exceptions.ClientNotFoundException;
 import dev.anderson.emprestimoapi.exceptions.LoanNotFoundException;
 import dev.anderson.emprestimoapi.exceptions.MaxLoanException;
@@ -41,6 +42,13 @@ public class GlobalExceptionHandler {
         List<String> errors = Collections.singletonList(ex.getMessage());
 
         return new ResponseEntity<>(getErrorsMap(errors), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ClientDuplicatedException.class)
+    public ResponseEntity<Map<String, List<String>>> handleClientDuplicated(Exception ex) {
+        List<String> errors = Collections.singletonList(ex.getMessage());
+
+        return new ResponseEntity<>(getErrorsMap(errors), HttpStatus.CONFLICT);
     }
 
     private Map<String, List<String>> getErrorsMap(List<String> errors) {

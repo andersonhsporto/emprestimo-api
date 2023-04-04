@@ -2,6 +2,7 @@ package dev.anderson.emprestimoapi.service;
 
 import dev.anderson.emprestimoapi.dto.ClientDto;
 import dev.anderson.emprestimoapi.entities.ClientEntity;
+import dev.anderson.emprestimoapi.exceptions.ClientDuplicatedException;
 import dev.anderson.emprestimoapi.exceptions.ClientNotFoundException;
 import dev.anderson.emprestimoapi.mapper.ClientMapper;
 import dev.anderson.emprestimoapi.repositories.ClientRepository;
@@ -19,11 +20,14 @@ public class ClientService {
 
     private ClientMapper clientMapper;
 
-    public ClientDto makeClient(ClientDto clientDto) {
-        ClientEntity clientEntity = clientMapper.toModel(clientDto);
+    public ClientDto makeClient(ClientDto clientDto) throws ClientDuplicatedException {
+        if (!clientRepository.existsByCpf(clientDto.getCpf())) {
+            ClientEntity clientEntity = clientMapper.toModel(clientDto);
 
-        clientRepository.save(clientEntity);
-        return clientMapper.toDto(clientEntity);
+            clientRepository.save(clientEntity);
+            return clientMapper.toDto(clientEntity);
+        }
+        throw new ClientDuplicatedException(clientDto.getCpf());
     }
 
     public List<ClientDto> getAllClients() {

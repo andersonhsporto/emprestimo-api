@@ -19,7 +19,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientDto makeClient(@Valid @RequestBody ClientDto clientDto) {
+    public ClientDto makeClient(@Valid @RequestBody ClientDto clientDto) throws Exception {
         return clientService.makeClient(clientDto);
     }
 
