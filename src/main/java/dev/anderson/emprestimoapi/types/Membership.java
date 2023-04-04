@@ -4,15 +4,15 @@ import java.math.BigDecimal;
 
 public enum Membership {
 
-    Bronze(1) {
+    Bronze() {
         @Override
-        public BigDecimal getMembershipStatus(BigDecimal startValue, Integer numberOfLoans) {
+        public BigDecimal getEndValue(BigDecimal startValue, Integer numberOfLoans) {
             return startValue.multiply(BigDecimal.valueOf(1.8));
         }
     },
-    Silver(2) {
+    Silver() {
         @Override
-        public BigDecimal getMembershipStatus(BigDecimal startValue, Integer numberOfLoans) {
+        public BigDecimal getEndValue(BigDecimal startValue, Integer numberOfLoans) {
             if (startValue.compareTo(BigDecimal.valueOf(5000)) > 0) {
                 return startValue.multiply(BigDecimal.valueOf(1.5));
             } else {
@@ -20,9 +20,9 @@ public enum Membership {
             }
         }
     },
-    Gold(3) {
+    Gold() {
         @Override
-        public BigDecimal getMembershipStatus(BigDecimal startValue, Integer numberOfLoans) {
+        public BigDecimal getEndValue(BigDecimal startValue, Integer numberOfLoans) {
             if (numberOfLoans == 1) {
                 return startValue.multiply(BigDecimal.valueOf(1.2));
             } else {
@@ -31,9 +31,9 @@ public enum Membership {
         }
     };
 
-    private Membership(int code) {
+    private Membership() {
     }
 
-    public abstract BigDecimal getMembershipStatus(BigDecimal salary, Integer numberOfLoans);
+    public abstract BigDecimal getEndValue(BigDecimal salary, Integer numberOfLoans);
 
 }
