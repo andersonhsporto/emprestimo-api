@@ -16,7 +16,7 @@ public class ClientDto {
     private String name;
 
     @JsonProperty("CPF")
-    @CPF(message = "O campo 'CPF' deve estar no formato '999.999.999-99'")
+    @CPF(message = "Cpf inválido")
     private String cpf;
 
     @JsonProperty("telefone")
