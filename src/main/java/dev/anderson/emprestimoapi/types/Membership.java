@@ -25,12 +25,10 @@ public enum Membership {
     Gold() {
         @Override
         public BigDecimal getEndValue(BigDecimal startValue, Integer numberOfLoans) {
-            if (numberOfLoans == 1) {
+            if (numberOfLoans < 2) {
                 return startValue.multiply(BigDecimal.valueOf(1.2));
-            } else if (numberOfLoans > 1) {
-                return startValue.multiply(BigDecimal.valueOf(1.3));
             } else {
-                return startValue.multiply(BigDecimal.valueOf(1));
+                return startValue.multiply(BigDecimal.valueOf(1.3));
             }
         }
     };
