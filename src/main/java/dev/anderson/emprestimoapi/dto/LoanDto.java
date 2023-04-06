@@ -41,5 +41,6 @@ public class LoanDto {
     @NotNull(message = "O campo 'relacionamento' é obrigatório")
     private Membership membership;
 
+    @JsonProperty("ValorFinal")
     private BigDecimal endValue;
 }
