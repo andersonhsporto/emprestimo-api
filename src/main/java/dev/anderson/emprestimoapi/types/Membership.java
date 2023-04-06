@@ -1,5 +1,7 @@
 package dev.anderson.emprestimoapi.types;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import java.math.BigDecimal;
 
 public enum Membership {
@@ -25,8 +27,10 @@ public enum Membership {
         public BigDecimal getEndValue(BigDecimal startValue, Integer numberOfLoans) {
             if (numberOfLoans == 1) {
                 return startValue.multiply(BigDecimal.valueOf(1.2));
-            } else {
+            } else if (numberOfLoans > 1) {
                 return startValue.multiply(BigDecimal.valueOf(1.3));
+            } else {
+                return startValue.multiply(BigDecimal.valueOf(1));
             }
         }
     };
@@ -35,5 +39,17 @@ public enum Membership {
     }
 
     public abstract BigDecimal getEndValue(BigDecimal salary, Integer numberOfLoans);
+
+    @JsonCreator
+    public static Membership fromString(String value) {
+        if (value != null) {
+            for (Membership membership : Membership.values()) {
+                if (value.equalsIgnoreCase(membership.name())) {
+                    return membership;
+                }
+            }
+        }
+        return null;
+    }
 
 }
