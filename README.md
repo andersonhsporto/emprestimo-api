@@ -79,8 +79,7 @@ arquivo [pom.xml](https://github.com/andersonhsporto/emprestimo-api/blob/master/
 | GET |    "/api/v1/clientes/{cpf}/emprestimos    | Retorna todos os empréstimos do cliente com o cpf informado |
 | GET | "/api/v1/clientes/{cpf}/emprestimos/{id}" | Retorna o empréstimo do cliente com o cpf informado e o id informado |
 | POST |   "/api/v1/clientes/{cpf}/emprestimos"     |       Cadastra um novo empréstimo para o cliente com o cpf informado        |
-| PUT | "/api/v1/clientes/{cpf}/emprestimos/{id}" | Atualiza o empréstimo do cliente com o cpf informado e o id informado |
-
+| DELETE | "/api/v1/clientes/{cpf}/emprestimos/{id}" |  Deleta o empréstimo do cliente com o cpf informado e o id informado  |
 ## Exemplos de requisições
 
 ### Clientes
