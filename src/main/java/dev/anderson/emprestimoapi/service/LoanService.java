@@ -26,7 +26,7 @@ public class LoanService {
     private LoanMapper loanMapper;
 
     public LoanDto makeLoan(String cpf, LoanDto loanDto) throws Exception {
-        if (clientRepository.existsByCpf(cpf)) {
+        if (clientRepository.existsByCpf(cpf) && cpf.equals(loanDto.getCPFClient())) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
             BigDecimal startValue = loanDto.getStartValue();
 
