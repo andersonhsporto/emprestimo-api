@@ -33,7 +33,7 @@ public class LoanEntity {
 
     private LocalDate endDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private ClientEntity client;
 
     public void updateEndValue() {

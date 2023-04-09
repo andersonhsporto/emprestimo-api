@@ -38,6 +38,16 @@ Para executar o projeto através do Docker, basta executar o comando abaixo na r
 docker-compose up
 ```
 
+### Testes de Unidade
+
+Para executar os testes de unidade, basta executar o comando abaixo na raiz do projeto:
+
+```bash
+mvn test
+```
+
+este comando irá executar os testes de unidade e exibirá o resultado no console.
+
 ## Requisitos do sistema
 
 - Possuir o JDK 1.8 instalado
@@ -57,9 +67,9 @@ arquivo [pom.xml](https://github.com/andersonhsporto/emprestimo-api/blob/master/
 | Spring-boot-starter-data-jpa | Responsável por conectar a aplicação Spring como o banco de dados |  2.7.9  |
 |   Spring-boot-starter-web    |               Responsável pela camada MVC do Spring               |  2.7.9  |
 |        Project-lombok        |          Biblioteca para reduzir a verbosidade do código          | 1.18.20 |
-| Mapstruct-processor          | Responsável por gerar os mappers de conversão de objetos          |  1.4.2  |
-| Spring Validation            | Responsável por validar os objetos de entrada da API              |  2.7.9  |
-
+|     Mapstruct-processor      | Responsável por gerar os mappers de conversão de objetos          |  1.4.2  |
+|      Spring Validation       | Responsável por validar os objetos de entrada da API              |  2.7.9  |
+|           Junit 5            | Biblioteca para criação de testes unitários                        |  5.8.1  |
 ## Endpoints
 
 ### Clientes

@@ -37,7 +37,7 @@ public class ClientEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private AddressEntity address;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<LoanEntity> loans;
 
     public boolean isEligibleForLoan(BigDecimal startValue) {
