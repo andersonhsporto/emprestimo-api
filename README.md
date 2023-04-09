@@ -173,7 +173,7 @@ curl --location --request DELETE 'http://localhost:8080/api/v1/clientes/81599250
 
 ## Json de exemplo
 
-Para facilitar o entendimento do projeto, segue abaixo um json de exemplo para cada entidade.
+Para facilitar o entendimento do projeto, segue abaixo um json de exemplo para cada recurso.
 
 ### Cliente
 
