@@ -214,6 +214,9 @@ O banco de dados utilizado foi o H2, que é um banco de dados em memória. Para 
 
 #### Relacionamento entre as entidades
 
+O relacionamento entre as entidades Cliente e Empréstimo é de um para muitos, ou seja, um cliente pode ter vários empréstimos, mas um empréstimo só pode ter um cliente.
+Além disso, o relacionamento entre as entidades Cliente e Endereço é de um para um, ou seja, um cliente só pode ter um endereço.
+
 ![Untitled](https://user-images.githubusercontent.com/47704550/230756413-11ceaabd-5297-4563-b8ff-8a719bf5a70a.png)
 
 
