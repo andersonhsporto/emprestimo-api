@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -42,10 +43,10 @@ public class LoanService {
         if (clientRepository.existsByCpf(cpf)) {
             if (loanRepository.existsByIdAndAndCPFClient(id, cpf)) {
                 ClientEntity clientEntity = clientRepository.findByCpf(cpf);
-                LoanEntity loanEntity = loanRepository.findById(id).get();
+                Optional<LoanEntity> loanEntity = loanRepository.findById(id);
 
-                clientEntity.removeLoan(loanEntity);
-                loanRepository.delete(loanEntity);
+                clientEntity.removeLoan(loanEntity.get());
+                loanRepository.delete(loanEntity.get());
                 return;
             }
             throw new LoanNotFoundException(cpf, id);
@@ -56,7 +57,7 @@ public class LoanService {
     public LoanDto getLoan(String cpf, Long id) throws Exception {
         if (clientRepository.existsByCpf(cpf)) {
             if (loanRepository.existsByIdAndAndCPFClient(id, cpf)) {
-                LoanEntity loanEntity = loanRepository.findById(id).get();
+                LoanEntity loanEntity = loanRepository.getReferenceById(id);
 
                 return loanMapper.toDto(loanEntity);
             }
