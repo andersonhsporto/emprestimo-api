@@ -214,7 +214,8 @@ O banco de dados utilizado foi o H2, que é um banco de dados em memória. Para 
 
 #### Relacionamento entre as entidades
 
-![Relacionamento entre as entidades](https://i.imgur.com/0Z7ZQ2M.png)
+![Untitled](https://user-images.githubusercontent.com/47704550/230756413-11ceaabd-5297-4563-b8ff-8a719bf5a70a.png)
+
 
 ## Informações de contato
 
