@@ -201,6 +201,21 @@ Para facilitar o entendimento do projeto, segue abaixo um json de exemplo para c
 }
 ```
 
+### Banco de dados
+
+O banco de dados utilizado foi o H2, que é um banco de dados em memória. Para acessar o console do banco de dados, basta acessar a url http://localhost:8080/h2-console e inserir as informações abaixo:
+
+| Campo |       Valor        |
+|:-----:|:------------------:|
+| Driver Class |   org.h2.Driver    |
+| JDBC URL | jdbc:h2:mem:emprestimo |   
+| User Name |         sa         |
+| Password |    {em branco}     |
+
+#### Relacionamento entre as entidades
+
+![Relacionamento entre as entidades](https://i.imgur.com/0Z7ZQ2M.png)
+
 ## Informações de contato
 
 Caso tenha alguma dúvida, sugestão ou crítica, entre em contato comigo pelo [email](mailto:anderson.higo2@gmail.com)
