@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Api para gerenciamento de clientes e empréstimos.
+Api REST para gerenciamento de clientes e empréstimos.
 
 ## Tecnologias
 
