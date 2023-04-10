@@ -42,10 +42,22 @@ public enum Membership {
     public static Membership fromString(String value) {
         if (value != null) {
             for (Membership membership : Membership.values()) {
-                if (value.equalsIgnoreCase(membership.name())) {
+                if (value.equalsIgnoreCase(membership.name()) || value.equalsIgnoreCase(membership.translate())) {
                     return membership;
                 }
             }
+        }
+        return null;
+    }
+
+    private String translate() {
+        switch (this) {
+            case Bronze:
+                return "Bronze";
+            case Silver:
+                return "Prata";
+            case Gold:
+                return "Ouro";
         }
         return null;
     }
