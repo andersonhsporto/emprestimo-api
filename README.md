@@ -90,7 +90,60 @@ arquivo [pom.xml](https://github.com/andersonhsporto/emprestimo-api/blob/master/
 | GET | "/api/v1/clientes/{cpf}/emprestimos/{id}" | Retorna o empréstimo do cliente com o cpf informado e o id informado |
 | POST |   "/api/v1/clientes/{cpf}/emprestimos"     |       Cadastra um novo empréstimo para o cliente com o cpf informado        |
 | DELETE | "/api/v1/clientes/{cpf}/emprestimos/{id}" |  Deleta o empréstimo do cliente com o cpf informado e o id informado  |
+
 ## Exemplos de requisições
+
+
+### Postman
+
+Para facilitar o teste dos endpoints, foi criado uma collection no Postman com todos os endpoints e exemplos de requisições.
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/lively-resonance-591127/workspace/emprestimo-api/collection/19722349-38ae9e8a-c659-4caa-9be0-3d923a63320a?action=share&creator=19722349)
+
+
+## Json de exemplo
+
+Para facilitar o entendimento do projeto, segue abaixo um json de exemplo para cada recurso.
+
+### Cliente
+
+```json
+{
+    "nome": "Frodo Bolseiro",
+    "CPF": "81599250004",
+    "telefone": "11999999999",
+    "rendimentoMensal": 100000,
+    "rua": "1 Bagshot Row, Condado",
+    "numero": 1123,
+    "CEP": "04111-111"
+}
+```
+
+
+* O campo CPF é utilizado como identificador do cliente, portanto não pode ser repetido e deve ser um CPF válido.
+* O campo telefone deve ser um número de telefone válido celular ou fixo ( 10 ou 11 dígitos) sem máscara.
+* O campo rendimentoMensal deve ser um número positivo.
+* O campo CEP deve ser um CEP válido no formato 00000-000.
+
+
+### Empréstimo
+
+```json
+{
+    "CPFCliente": "81599250004",
+    "ValorInicial": 1.00,
+    "dataInicio": "2017-01-13",
+    "dataFinal": "2017-01-13",
+    "relacionamento": "GOLD"
+}
+```
+
+* O campo CPFCliente é utilizado para identificar o cliente que está realizando o empréstimo.
+* O campo ValorInicial deve ser um número positivo.
+* O campo dataInicio deve ser uma data válida no formato yyyy-MM-dd.
+* O campo dataFinal deve ser uma data válida no formato yyyy-MM-dd.
+* O campo relacionamento descreve o relacionamento do cliente com a empresa este é utilizado para calcular o valor final do empréstimo. 
+Os valores possíveis são: OURO, PRATA e BRONZE ou suas respectivas traduções em inglês (GOLD, SILVER e BRONZE).
 
 ### Clientes
 
@@ -178,36 +231,6 @@ curl --location --request POST 'http://localhost:8080/api/v1/clientes/8159925000
 
 ```bash
 curl --location --request DELETE 'http://localhost:8080/api/v1/clientes/81599250004/emprestimos/1'
-```
-
-## Json de exemplo
-
-Para facilitar o entendimento do projeto, segue abaixo um json de exemplo para cada recurso.
-
-### Cliente
-
-```json
-{
-    "nome": "Frodo Bolseiro",
-    "CPF": "81599250004",
-    "telefone": "11999999999",
-    "rendimentoMensal": 100000,
-    "rua": "1 Bagshot Row, Condado",
-    "numero": 1123,
-    "CEP": "04111-111"
-}
-```
-
-### Empréstimo
-
-```json
-{
-    "CPFCliente": "81599250004",
-    "ValorInicial": 1.00,
-    "dataInicio": "2017-01-13",
-    "dataFinal": "2017-01-13",
-    "relacionamento": "GOLD"
-}
 ```
 
 ### Banco de dados
