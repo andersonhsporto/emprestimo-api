@@ -20,6 +20,7 @@ public class ClientDto {
     private String cpf;
 
     @JsonProperty("telefone")
+    @Pattern(regexp = "\\d{10,11}", message = "O campo 'telefone' deve conter apenas números")
     private String telephone;
 
     @JsonProperty("salario")
