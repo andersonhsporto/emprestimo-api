@@ -24,8 +24,8 @@ public class ClientDto {
     @Pattern(regexp = "^.{10,11}$", message = "O campo 'telefone' deve conter entre 10 e 11 números")
     private String telephone;
 
-    @JsonProperty("salario")
-    @DecimalMin(value = "0.0", inclusive = false, message = "O campo 'salario' deve ser maior que 0")
+    @JsonProperty("rendimentoMensal")
+    @DecimalMin(value = "0.0", inclusive = false, message = "O campo 'rendimentoMensal' deve ser maior que 0")
     private BigDecimal salary;
 
     @JsonProperty("rua")

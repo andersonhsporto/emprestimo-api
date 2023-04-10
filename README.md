@@ -115,7 +115,7 @@ curl --location --request POST 'http://localhost:8080/api/v1/clientes' \
     "nome": "Frodo Bolseiro",
     "CPF": "81599250004",
     "telefone": "11999999999",
-    "salario": 100000,
+    "rendimentoMensal": 100000,
     "rua": "1 Bagshot Row, Condado",
     "numero": 1123,
     "CEP": "04111-111"
@@ -131,7 +131,7 @@ curl --location --request PUT 'http://localhost:8080/api/v1/clientes/81599250004
     "nome": "Frodo Bolseiro",
     "CPF": "81599250004",
     "telefone": "11999999999",
-    "salario": 1000000,
+    "rendimentoMensal": 1000000,
     "rua": "Valfenda",
     "numero": 1123,
     "CEP": "04111-111"
@@ -191,7 +191,7 @@ Para facilitar o entendimento do projeto, segue abaixo um json de exemplo para c
     "nome": "Frodo Bolseiro",
     "CPF": "81599250004",
     "telefone": "11999999999",
-    "salario": 100000,
+    "rendimentoMensal": 100000,
     "rua": "1 Bagshot Row, Condado",
     "numero": 1123,
     "CEP": "04111-111"
