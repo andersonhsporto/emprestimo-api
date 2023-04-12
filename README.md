@@ -110,12 +110,12 @@ Para facilitar o entendimento do projeto, segue abaixo um json de exemplo para c
 ```json
 {
     "nome": "Frodo Bolseiro",
-    "CPF": "81599250004",
+    "cpf": "81599250004",
     "telefone": "11999999999",
     "rendimentoMensal": 100000,
     "rua": "1 Bagshot Row, Condado",
     "numero": 1123,
-    "CEP": "04111-111"
+    "cep": "04111-111"
 }
 ```
 
@@ -130,16 +130,16 @@ Para facilitar o entendimento do projeto, segue abaixo um json de exemplo para c
 
 ```json
 {
-    "CPFCliente": "81599250004",
-    "ValorInicial": 1.00,
+    "cpfCliente": "81599250004",
+    "valorInicial": 1.00,
     "dataInicio": "2017-01-13",
     "dataFinal": "2017-01-13",
     "relacionamento": "GOLD"
 }
 ```
 
-* O campo CPFCliente é utilizado para identificar o cliente que está realizando o empréstimo.
-* O campo ValorInicial deve ser um número positivo.
+* O campo cpfCliente é utilizado para identificar o cliente que está realizando o empréstimo.
+* O campo valorInicial deve ser um número positivo.
 * O campo dataInicio deve ser uma data válida no formato yyyy-MM-dd.
 * O campo dataFinal deve ser uma data válida no formato yyyy-MM-dd.
 * O campo relacionamento descreve o relacionamento do cliente com a empresa este é utilizado para calcular o valor final do empréstimo. 
@@ -166,12 +166,12 @@ curl --location --request POST 'http://localhost:8080/api/v1/clientes' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "nome": "Frodo Bolseiro",
-    "CPF": "81599250004",
+    "cpf": "81599250004",
     "telefone": "11999999999",
     "rendimentoMensal": 100000,
     "rua": "1 Bagshot Row, Condado",
     "numero": 1123,
-    "CEP": "04111-111"
+    "cep": "04111-111"
 }'
 ```
 
@@ -182,12 +182,12 @@ curl --location --request PUT 'http://localhost:8080/api/v1/clientes/81599250004
 --header 'Content-Type: application/json' \
 --data-raw '{
     "nome": "Frodo Bolseiro",
-    "CPF": "81599250004",
+    "cpf": "81599250004",
     "telefone": "11999999999",
     "rendimentoMensal": 1000000,
     "rua": "Valfenda",
     "numero": 1123,
-    "CEP": "04111-111"
+    "cep": "04111-111"
 }'
 ```
 
@@ -219,8 +219,8 @@ curl --location --request GET 'http://localhost:8080/api/v1/clientes/81599250004
 curl --location --request POST 'http://localhost:8080/api/v1/clientes/81599250004/emprestimos' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "CPFCliente": "81599250004",
-    "ValorInicial": 1.00,
+    "cpfCliente": "81599250004",
+    "valorInicial": 1.00,
     "dataInicio": "2017-01-13",
     "dataFinal": "2017-01-13",
     "relacionamento": "GOLD"

@@ -15,8 +15,8 @@ public class ClientDto {
     @JsonProperty("nome")
     private String name;
 
-    @JsonProperty("CPF")
-    @CPF(message = "Cpf inválido")
+    @JsonProperty("cpf")
+    @CPF(message = "CPF inválido")
     private String cpf;
 
     @JsonProperty("telefone")
@@ -35,7 +35,7 @@ public class ClientDto {
     @Digits(integer = 10, fraction = 0, message = "O campo 'numero' deve ser um número inteiro")
     private String number;
 
-    @JsonProperty("CEP")
+    @JsonProperty("cep")
     @Pattern(regexp = "\\d{5}-\\d{3}", message = "O campo 'CEP' deve estar no formato '99999-999'")
     private String zipCode;
 }

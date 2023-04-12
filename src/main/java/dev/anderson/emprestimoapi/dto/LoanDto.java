@@ -17,12 +17,12 @@ public class LoanDto {
 
     private Long id;
 
-    @JsonProperty("CPFCliente")
+    @JsonProperty("cpfCliente")
     @NotEmpty(message = "O campo 'CPFCliente' é obrigatório")
     @CPF
     private String CPFClient;
 
-    @JsonProperty("ValorInicial")
+    @JsonProperty("valorInicial")
     @NotNull(message = "O campo 'ValorInicial' é obrigatório")
     @DecimalMin(value = "0.0", inclusive = false, message = "O campo 'ValorInicial' deve ser maior que 0")
     private BigDecimal startValue;
