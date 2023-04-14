@@ -44,11 +44,7 @@ public class ClientEntity {
         BigDecimal loanTotal = getLoanValue();
         BigDecimal maxLoanValue = getClientLoanLimit();
 
-        if (loanTotal.add(startValue).compareTo(maxLoanValue) > 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return loanTotal.add(startValue).compareTo(maxLoanValue) <= 0;
     }
 
     public void addLoan(LoanEntity loan) {

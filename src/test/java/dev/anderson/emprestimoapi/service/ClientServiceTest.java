@@ -9,7 +9,6 @@ import dev.anderson.emprestimoapi.repositories.ClientRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,10 +16,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(properties = "spring.main.banner-mode=off")
 @AutoConfigureDataJpa
@@ -221,8 +218,9 @@ class ClientServiceTest {
         ClientEntity clientEntityOld = clientMapper.toModel(clientDtoOld);
         clientRepository.save(clientEntityOld);
 
+        String cpf = "12345678901";
         ClientDto clientDto = new ClientDto();
-        clientDto.setCpf("12345678901");
+        clientDto.setCpf(cpf);
         clientDto.setName("Bilbo Baggins");
         clientDto.setStreet("Hobbiton");
         clientDto.setNumber("1");
@@ -236,6 +234,6 @@ class ClientServiceTest {
         clientDto.setName("Frodo Baggins");
         clientDto.setCpf("05193681506");
 
-        assertThrows(ClientDuplicatedException.class, () -> clientService.updateClientByCpf(clientDto.getCpf(), clientDto));
+        assertThrows(ClientDuplicatedException.class, () -> clientService.updateClientByCpf(cpf, clientDto));
     }
 }
