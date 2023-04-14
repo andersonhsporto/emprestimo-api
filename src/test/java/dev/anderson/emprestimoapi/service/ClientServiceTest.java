@@ -208,7 +208,7 @@ class ClientServiceTest {
 
     @Test
     @DisplayName("Test if updateClientByCpf return a ClientDuplicatedException when client already exists")
-    void updateClientThatAlreadyExists() throws ClientNotFoundException, ClientDuplicatedException {
+    void updateClientThatAlreadyExists() {
         ClientDto clientDtoOld = new ClientDto();
         clientDtoOld.setCpf("05193681506");
         clientDtoOld.setName("Bilbo Baggins");
