@@ -63,7 +63,6 @@ public class ClientService {
         if (clientRepository.existsByCpf(cpf)) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
 
-
             clientMapper.updateClientEntity(clientDto, clientEntity);
             clientRepository.save(clientEntity);
             return clientMapper.toDto(clientEntity);
