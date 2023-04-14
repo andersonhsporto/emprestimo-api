@@ -56,7 +56,7 @@ public class ClientService {
     }
 
     public ClientDto updateClientByCpf(String cpf, ClientDto clientDto) throws ClientNotFoundException, ClientDuplicatedException {
-        if (clientRepository.existsByCpf(clientDto.getCpf())) {
+        if (!clientDto.getCpf().isEmpty() && clientRepository.existsByCpf(clientDto.getCpf())) {
             throw new ClientDuplicatedException(clientDto.getCpf());
         }
 
