@@ -22,7 +22,7 @@ public class AddressEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "O campo 'cidade' é obrigatório")
+    @NotNull(message = "O campo 'rua' é obrigatório")
     private String street;
 
     @NotNull(message = "O campo 'numero' é obrigatório")
