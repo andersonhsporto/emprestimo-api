@@ -55,9 +55,14 @@ public class ClientService {
         }
     }
 
-    public ClientDto updateClientByCpf(String cpf, ClientDto clientDto) throws ClientNotFoundException {
+    public ClientDto updateClientByCpf(String cpf, ClientDto clientDto) throws ClientNotFoundException, ClientDuplicatedException {
+        if (clientRepository.existsByCpf(clientDto.getCpf())) {
+            throw new ClientDuplicatedException(clientDto.getCpf());
+        }
+
         if (clientRepository.existsByCpf(cpf)) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+
 
             clientMapper.updateClientEntity(clientDto, clientEntity);
             clientRepository.save(clientEntity);
