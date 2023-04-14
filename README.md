@@ -82,6 +82,8 @@ arquivo [pom.xml](https://github.com/andersonhsporto/emprestimo-api/blob/master/
 |  PUT   | "/api/v1/clientes/{cpf}" | Atualiza o cliente com o cpf informado |
 | DELETE | "/api/v1/clientes/{cpf}" |  Deleta o cliente com o cpf informado  |
 
+*Ao atualizar um cliente (PUT), os campos que não forem informados serão mantidos.*
+
 ### Empréstimos
 
 | Método |                 Endpoint                  |                              Descrição                               |
