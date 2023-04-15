@@ -66,14 +66,6 @@ public class ClientService {
         }
     }
 
-    private void updateAllCpf(String cpf, ClientEntity clientEntity) {
-        List<LoanEntity> loanEntityList = clientEntity.getLoans();
-
-        for (LoanEntity loanEntity : loanEntityList) {
-            loanEntity.setCPFClient(cpf);
-        }
-    }
-
     private ClientDto updatePersist(String cpf, ClientDto clientDto) {
         ClientEntity clientEntity = clientRepository.findByCpf(cpf);
 
@@ -83,6 +75,14 @@ public class ClientService {
         }
         clientRepository.save(clientEntity);
         return clientMapper.toDto(clientEntity);
+    }
+
+    private void updateAllCpf(String cpf, ClientEntity clientEntity) {
+        List<LoanEntity> loanEntityList = clientEntity.getLoans();
+
+        for (LoanEntity loanEntity : loanEntityList) {
+            loanEntity.setCPFClient(cpf);
+        }
     }
 
 }
