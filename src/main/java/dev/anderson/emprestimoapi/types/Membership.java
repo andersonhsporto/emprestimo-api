@@ -33,10 +33,8 @@ public enum Membership {
         }
     };
 
-    private Membership() {
+    Membership() {
     }
-
-    public abstract BigDecimal getEndValue(BigDecimal salary, Integer numberOfLoans);
 
     @JsonCreator
     public static Membership fromString(String value) {
@@ -49,6 +47,8 @@ public enum Membership {
         }
         return null;
     }
+
+    public abstract BigDecimal getEndValue(BigDecimal salary, Integer numberOfLoans);
 
     private String translate() {
         switch (this) {

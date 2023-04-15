@@ -64,32 +64,34 @@ arquivo [pom.xml](https://github.com/andersonhsporto/emprestimo-api/blob/master/
 |         Dependência          |                             Descrição                             | Versão  |
 |:----------------------------:|:-----------------------------------------------------------------:|:-------:|
 |          H2database          | Banco de dados relacional escrito em Java que funciona em memória | 2.1.214 |
-| Spring-boot-starter-data-jpa | Responsável por conectar a aplicação Spring como o banco de dados |  2.7.9  |
+| Spring-boot-starter-data-jpa | Responsável por conectar a aplicação Spring com o banco de dados  |  2.7.9  |
 |   Spring-boot-starter-web    |               Responsável pela camada MVC do Spring               |  2.7.9  |
 |        Project-lombok        |          Biblioteca para reduzir a verbosidade do código          | 1.18.20 |
-|     Mapstruct-processor      | Responsável por gerar os mappers de conversão de objetos          |  1.4.2  |
-|      Spring Validation       | Responsável por validar os objetos de entrada da API              |  2.7.9  |
-|           Junit 5            | Biblioteca para criação de testes unitários                        |  5.8.1  |
+|     Mapstruct-processor      |     Responsável por gerar os mappers de conversão de objetos      |  1.4.2  |
+|      Spring Validation       |       Responsável por validar os objetos de entrada da API        |  2.7.9  |
+|           Junit 5            |           Biblioteca para criação de testes de unidade            |  5.8.1  |
 ## Endpoints
 
 ### Clientes
 
-| Método |         Endpoint         |               Descrição               |
-|:------:|:------------------------:|:-------------------------------------:|
-| GET |    "/api/v1/clientes"    | Retorna todos os clientes cadastrados |
-| GET | "/api/v1/clientes/{cpf}" | Retorna o cliente com o cpf informado |
-| POST |   "/api/v1/clientes"     |       Cadastra um novo cliente        |
-| PUT | "/api/v1/clientes/{cpf}" | Atualiza o cliente com o cpf informado |
+| Método |         Endpoint         |               Descrição                |
+|:------:|:------------------------:|:--------------------------------------:|
+|  GET   |    "/api/v1/clientes"    | Retorna todos os clientes cadastrados  |
+|  GET   | "/api/v1/clientes/{cpf}" | Retorna o cliente com o cpf informado  |
+|  POST  |    "/api/v1/clientes"    |        Cadastra um novo cliente        |
+|  PUT   | "/api/v1/clientes/{cpf}" | Atualiza o cliente com o cpf informado |
 | DELETE | "/api/v1/clientes/{cpf}" |  Deleta o cliente com o cpf informado  |
+
+*Ao atualizar um cliente (PUT), os campos que não forem informados serão mantidos.*
 
 ### Empréstimos
 
-| Método |         Endpoint         |               Descrição               |
-|:------:|:------------------------:|:-------------------------------------:|
-| GET |    "/api/v1/clientes/{cpf}/emprestimos    | Retorna todos os empréstimos do cliente com o cpf informado |
-| GET | "/api/v1/clientes/{cpf}/emprestimos/{id}" | Retorna o empréstimo do cliente com o cpf informado e o id informado |
-| POST |   "/api/v1/clientes/{cpf}/emprestimos"     |       Cadastra um novo empréstimo para o cliente com o cpf informado        |
-| DELETE | "/api/v1/clientes/{cpf}/emprestimos/{id}" |  Deleta o empréstimo do cliente com o cpf informado e o id informado  |
+| Método |                 Endpoint                  |                              Descrição                               |
+|:------:|:-----------------------------------------:|:--------------------------------------------------------------------:|
+|  GET   |    "/api/v1/clientes/{cpf}/emprestimos    |     Retorna todos os empréstimos do cliente com o cpf informado      |
+|  GET   | "/api/v1/clientes/{cpf}/emprestimos/{id}" | Retorna o empréstimo do cliente com o cpf informado e o id informado |
+|  POST  |   "/api/v1/clientes/{cpf}/emprestimos"    |    Cadastra um novo empréstimo para o cliente com o cpf informado    |
+| DELETE | "/api/v1/clientes/{cpf}/emprestimos/{id}" | Deleta o empréstimo do cliente com o cpf informado e o id informado  |
 
 ## Exemplos de requisições
 
@@ -237,12 +239,12 @@ curl --location --request DELETE 'http://localhost:8080/api/v1/clientes/81599250
 
 O banco de dados utilizado foi o H2, que é um banco de dados em memória. Para acessar o console do banco de dados, basta acessar a url http://localhost:8080/h2-console e inserir as informações abaixo:
 
-| Campo |       Valor        |
-|:-----:|:------------------:|
-| Driver Class |   org.h2.Driver    |
-| JDBC URL | jdbc:h2:mem:emprestimo |   
-| User Name |         sa         |
-| Password |    {em branco}     |
+|    Campo     |         Valor          |
+|:------------:|:----------------------:|
+| Driver Class |     org.h2.Driver      |
+|   JDBC URL   | jdbc:h2:mem:emprestimo |   
+|  User Name   |           sa           |
+|   Password   |      {em branco}       |
 
 #### Relacionamento entre as entidades
 

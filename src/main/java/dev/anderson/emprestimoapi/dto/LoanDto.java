@@ -18,7 +18,7 @@ public class LoanDto {
     private Long id;
 
     @JsonProperty("cpfCliente")
-    @NotEmpty(message = "O campo 'CPFCliente' é obrigatório")
+    @NotEmpty(message = "O campo 'cpfCliente' é obrigatório")
     @CPF
     private String CPFClient;
 

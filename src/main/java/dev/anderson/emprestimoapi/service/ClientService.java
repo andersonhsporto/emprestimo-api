@@ -2,6 +2,7 @@ package dev.anderson.emprestimoapi.service;
 
 import dev.anderson.emprestimoapi.dto.ClientDto;
 import dev.anderson.emprestimoapi.entities.ClientEntity;
+import dev.anderson.emprestimoapi.entities.LoanEntity;
 import dev.anderson.emprestimoapi.exceptions.ClientDuplicatedException;
 import dev.anderson.emprestimoapi.exceptions.ClientNotFoundException;
 import dev.anderson.emprestimoapi.mapper.ClientMapper;
@@ -55,15 +56,32 @@ public class ClientService {
         }
     }
 
-    public ClientDto updateClientByCpf(String cpf, ClientDto clientDto) throws ClientNotFoundException {
-        if (clientRepository.existsByCpf(cpf)) {
-            ClientEntity clientEntity = clientRepository.findByCpf(cpf);
-
-            clientMapper.updateClientEntity(clientDto, clientEntity);
-            clientRepository.save(clientEntity);
-            return clientMapper.toDto(clientEntity);
-        } else {
+    public ClientDto updateClientByCpf(String cpf, ClientDto clientDto) throws ClientNotFoundException, ClientDuplicatedException {
+        if (clientRepository.existsByCpf(clientDto.getCpf()) && !clientDto.getCpf().equals(cpf)) {
+            throw new ClientDuplicatedException(clientDto.getCpf());
+        } else if (!clientRepository.existsByCpf(cpf)) {
             throw new ClientNotFoundException(cpf);
+        } else {
+            return updatePersist(cpf, clientDto);
+        }
+    }
+
+    private ClientDto updatePersist(String cpf, ClientDto clientDto) {
+        ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+
+        clientMapper.updateClientEntity(clientDto, clientEntity);
+        if (!cpf.equals(clientDto.getCpf())) {
+            updateAllCpf(clientDto.getCpf(), clientEntity);
+        }
+        clientRepository.save(clientEntity);
+        return clientMapper.toDto(clientEntity);
+    }
+
+    private void updateAllCpf(String cpf, ClientEntity clientEntity) {
+        List<LoanEntity> loanEntityList = clientEntity.getLoans();
+
+        for (LoanEntity loanEntity : loanEntityList) {
+            loanEntity.setCPFClient(cpf);
         }
     }
 

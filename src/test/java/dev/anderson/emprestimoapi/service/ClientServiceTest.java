@@ -9,7 +9,6 @@ import dev.anderson.emprestimoapi.repositories.ClientRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.core.AutoConfigureCache;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,9 +16,9 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest(properties = "spring.main.banner-mode=off")
 @AutoConfigureDataJpa
 @AutoConfigureTestDatabase
@@ -181,7 +180,7 @@ class ClientServiceTest {
 
     @Test
     @DisplayName("Test if updateClientByCpf updates a client when client exists")
-    void updateClientThatExists() throws ClientNotFoundException {
+    void updateClientThatExists() throws ClientNotFoundException, ClientDuplicatedException {
         ClientDto clientDto = new ClientDto();
         clientDto.setCpf("12345678901");
         clientDto.setName("Bilbo Baggins");
@@ -202,5 +201,39 @@ class ClientServiceTest {
         ClientDto clientDtoAfterUpdate = clientMapper.toDto(clientEntityAfterUpdate);
 
         assertEquals(clientDto, clientDtoAfterUpdate);
+    }
+
+    @Test
+    @DisplayName("Test if updateClientByCpf return a ClientDuplicatedException when client already exists")
+    void updateClientThatAlreadyExists() {
+        ClientDto clientDtoOld = new ClientDto();
+        clientDtoOld.setCpf("05193681506");
+        clientDtoOld.setName("Bilbo Baggins");
+        clientDtoOld.setStreet("Hobbiton");
+        clientDtoOld.setNumber("1");
+        clientDtoOld.setTelephone("1122223333");
+        clientDtoOld.setZipCode("12345-678");
+        clientDtoOld.setSalary(BigDecimal.valueOf(1000.00).setScale(2));
+
+        ClientEntity clientEntityOld = clientMapper.toModel(clientDtoOld);
+        clientRepository.save(clientEntityOld);
+
+        String cpf = "12345678901";
+        ClientDto clientDto = new ClientDto();
+        clientDto.setCpf(cpf);
+        clientDto.setName("Bilbo Baggins");
+        clientDto.setStreet("Hobbiton");
+        clientDto.setNumber("1");
+        clientDto.setTelephone("1122223333");
+        clientDto.setZipCode("12345-678");
+        clientDto.setSalary(BigDecimal.valueOf(1000.00).setScale(2));
+
+        ClientEntity clientEntity = clientMapper.toModel(clientDto);
+        clientRepository.save(clientEntity);
+
+        clientDto.setName("Frodo Baggins");
+        clientDto.setCpf("05193681506");
+
+        assertThrows(ClientDuplicatedException.class, () -> clientService.updateClientByCpf(cpf, clientDto));
     }
 }
