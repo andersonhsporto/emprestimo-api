@@ -2,6 +2,7 @@ package dev.anderson.emprestimoapi.service;
 
 import dev.anderson.emprestimoapi.dto.ClientDto;
 import dev.anderson.emprestimoapi.entities.ClientEntity;
+import dev.anderson.emprestimoapi.entities.LoanEntity;
 import dev.anderson.emprestimoapi.exceptions.ClientDuplicatedException;
 import dev.anderson.emprestimoapi.exceptions.ClientNotFoundException;
 import dev.anderson.emprestimoapi.mapper.ClientMapper;
@@ -58,16 +59,25 @@ public class ClientService {
     public ClientDto updateClientByCpf(String cpf, ClientDto clientDto) throws ClientNotFoundException, ClientDuplicatedException {
         if (clientRepository.existsByCpf(clientDto.getCpf()) && !clientDto.getCpf().equals(cpf)) {
             throw new ClientDuplicatedException(clientDto.getCpf());
-        }
-
-        if (clientRepository.existsByCpf(cpf)) {
+        } else if (!clientRepository.existsByCpf(cpf)) {
+            throw new ClientNotFoundException(cpf);
+        } else {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
 
             clientMapper.updateClientEntity(clientDto, clientEntity);
+            if (!cpf.equals(clientDto.getCpf())) {
+                updateAllCpf(clientDto.getCpf(), clientEntity);
+            }
             clientRepository.save(clientEntity);
             return clientMapper.toDto(clientEntity);
-        } else {
-            throw new ClientNotFoundException(cpf);
+        }
+    }
+
+    private void updateAllCpf(String cpf, ClientEntity clientEntity) {
+        List<LoanEntity> loanEntityList = clientEntity.getLoans();
+
+        for (LoanEntity loanEntity : loanEntityList) {
+            loanEntity.setCPFClient(cpf);
         }
     }
 
