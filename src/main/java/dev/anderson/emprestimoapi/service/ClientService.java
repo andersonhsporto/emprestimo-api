@@ -62,14 +62,7 @@ public class ClientService {
         } else if (!clientRepository.existsByCpf(cpf)) {
             throw new ClientNotFoundException(cpf);
         } else {
-            ClientEntity clientEntity = clientRepository.findByCpf(cpf);
-
-            clientMapper.updateClientEntity(clientDto, clientEntity);
-            if (!cpf.equals(clientDto.getCpf())) {
-                updateAllCpf(clientDto.getCpf(), clientEntity);
-            }
-            clientRepository.save(clientEntity);
-            return clientMapper.toDto(clientEntity);
+            return updatePersist(cpf, clientDto);
         }
     }
 
@@ -79,6 +72,17 @@ public class ClientService {
         for (LoanEntity loanEntity : loanEntityList) {
             loanEntity.setCPFClient(cpf);
         }
+    }
+
+    private ClientDto updatePersist(String cpf, ClientDto clientDto) {
+        ClientEntity clientEntity = clientRepository.findByCpf(cpf);
+
+        clientMapper.updateClientEntity(clientDto, clientEntity);
+        if (!cpf.equals(clientDto.getCpf())) {
+            updateAllCpf(clientDto.getCpf(), clientEntity);
+        }
+        clientRepository.save(clientEntity);
+        return clientMapper.toDto(clientEntity);
     }
 
 }
