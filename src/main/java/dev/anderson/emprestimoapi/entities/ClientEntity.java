@@ -25,6 +25,7 @@ public class ClientEntity {
     @NotEmpty(message = "O campo 'nome' é obrigatório")
     private String name;
 
+    @Column(unique = true)
     @NotEmpty(message = "O campo 'CPF' é obrigatório")
     private String cpf;
 
@@ -62,7 +63,7 @@ public class ClientEntity {
             return loanValue;
         }
         for (LoanEntity loan : loans) {
-            loanValue = loanValue.add(loan.getEndValue());
+            loanValue = loanValue.add(loan.getStartValue());
         }
         return loanValue;
     }

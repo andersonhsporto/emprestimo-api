@@ -57,13 +57,17 @@ public class ClientService {
     }
 
     public ClientDto updateClientByCpf(String cpf, ClientDto clientDto) throws ClientNotFoundException, ClientDuplicatedException {
-        if (clientRepository.existsByCpf(clientDto.getCpf()) && !clientDto.getCpf().equals(cpf)) {
+        if (updateCpfExists(cpf, clientDto)) {
             throw new ClientDuplicatedException(clientDto.getCpf());
         } else if (!clientRepository.existsByCpf(cpf)) {
             throw new ClientNotFoundException(cpf);
         } else {
             return updatePersist(cpf, clientDto);
         }
+    }
+
+    private boolean updateCpfExists(String cpf, ClientDto clientDto) {
+        return clientRepository.existsByCpf(clientDto.getCpf()) && !clientDto.getCpf().equals(cpf);
     }
 
     private ClientDto updatePersist(String cpf, ClientDto clientDto) {

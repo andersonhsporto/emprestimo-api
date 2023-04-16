@@ -33,6 +33,7 @@ public class ClientDto {
 
     @JsonProperty("numero")
     @Digits(integer = 10, fraction = 0, message = "O campo 'numero' deve ser um número inteiro")
+    @Pattern(regexp = "^[1-9]\\d*$", message = "O campo 'numero' não pode ser 0 ou iniciar com 0")
     private String number;
 
     @JsonProperty("cep")
