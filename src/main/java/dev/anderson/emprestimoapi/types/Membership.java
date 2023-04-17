@@ -6,32 +6,40 @@ import java.math.BigDecimal;
 
 public enum Membership {
 
-    Bronze() {
+    BRONZE() {
         @Override
         public BigDecimal getEndValue(BigDecimal startValue, Integer numberOfLoans) {
-            return startValue.multiply(BigDecimal.valueOf(1.8));
+            return startValue.multiply(bronzeTax);
         }
     },
-    Silver() {
+
+    SILVER() {
         @Override
         public BigDecimal getEndValue(BigDecimal startValue, Integer numberOfLoans) {
             if (startValue.compareTo(BigDecimal.valueOf(5000)) > 0) {
-                return startValue.multiply(BigDecimal.valueOf(1.5));
+                return startValue.multiply(silverTaxForMoreThan5000);
             } else {
-                return startValue.multiply(BigDecimal.valueOf(1.6));
+                return startValue.multiply(silverTax);
             }
         }
     },
-    Gold() {
+
+    GOLD() {
         @Override
         public BigDecimal getEndValue(BigDecimal startValue, Integer numberOfLoans) {
             if (numberOfLoans < 2) {
-                return startValue.multiply(BigDecimal.valueOf(1.2));
+                return startValue.multiply(goldTax);
             } else {
-                return startValue.multiply(BigDecimal.valueOf(1.3));
+                return startValue.multiply(goldTaxForMoreThan2Loans);
             }
         }
     };
+
+    private static final BigDecimal bronzeTax = BigDecimal.valueOf(1.8);
+    private static final BigDecimal silverTax = BigDecimal.valueOf(1.6);
+    private static final BigDecimal silverTaxForMoreThan5000 = BigDecimal.valueOf(1.5);
+    private static final BigDecimal goldTax = BigDecimal.valueOf(1.2);
+    private static final BigDecimal goldTaxForMoreThan2Loans = BigDecimal.valueOf(1.3);
 
     Membership() {
     }
@@ -52,11 +60,11 @@ public enum Membership {
 
     private String translate() {
         switch (this) {
-            case Bronze:
+            case BRONZE:
                 return "Bronze";
-            case Silver:
+            case SILVER:
                 return "Prata";
-            case Gold:
+            case GOLD:
                 return "Ouro";
         }
         return null;
