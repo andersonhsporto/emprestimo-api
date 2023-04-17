@@ -9,5 +9,4 @@ public interface LoanRepository extends JpaRepository<LoanEntity, Long> {
 
     boolean existsByIdAndAndCpfClient(Long id, String cpf);
 
-    List<LoanEntity> findAllByCpfClient(String cpf);
 }
