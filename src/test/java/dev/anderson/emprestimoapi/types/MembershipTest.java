@@ -2,159 +2,197 @@ package dev.anderson.emprestimoapi.types;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class MembershipTest {
 
-    @Test
+
     @DisplayName("Test if getEndValue returns the correct value for Bronze membership")
-    void getEndValueWithBronze() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"BRONZE"}
+    )
+    void getEndValueWithBronze(Membership membership) {
         BigDecimal startValue = BigDecimal.valueOf(1000);
         Integer numberOfLoans = 0;
-        BigDecimal actual = Membership.Bronze.getEndValue(startValue, numberOfLoans);
+        BigDecimal actual = membership.getEndValue(startValue, numberOfLoans);
 
         BigDecimal expected = BigDecimal.valueOf(1800.0);
 
         assertEquals(expected, actual);
     }
 
-    @Test
     @DisplayName("Test if getEndValue returns the correct value for Silver membership")
-    void getEndValueWithSilver() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"SILVER"}
+    )
+    void getEndValueWithSilver(Membership membership) {
         BigDecimal startValue = BigDecimal.valueOf(1000);
         Integer numberOfLoans = 0;
-        BigDecimal actual = Membership.Silver.getEndValue(startValue, numberOfLoans);
+        BigDecimal actual = membership.getEndValue(startValue, numberOfLoans);
 
         BigDecimal expected = BigDecimal.valueOf(1600.0);
 
         assertEquals(expected, actual);
     }
 
-    @Test
     @DisplayName("Test if getEndValue returns the correct value for Silver membership and salary greater than 5000")
-    void getEndValueWithSilverAndSalaryGreaterThan5000() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"SILVER"}
+    )
+    void getEndValueWithSilverAndSalaryGreaterThan5000(Membership membership) {
         BigDecimal startValue = BigDecimal.valueOf(6000);
         Integer numberOfLoans = 0;
-        BigDecimal actual = Membership.Silver.getEndValue(startValue, numberOfLoans);
+        BigDecimal actual = membership.getEndValue(startValue, numberOfLoans);
 
         BigDecimal expected = BigDecimal.valueOf(9000.0);
 
         assertEquals(expected, actual);
     }
 
-    @Test
     @DisplayName("Test if getEndValue returns the correct value for Silver membership and salary less than 5000")
-    void getEndValueWithSilverAndSalaryLessThan5000() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"SILVER"}
+    )
+    void getEndValueWithSilverAndSalaryLessThan5000(Membership membership) {
         BigDecimal startValue = BigDecimal.valueOf(4000);
         Integer numberOfLoans = 0;
-        BigDecimal actual = Membership.Silver.getEndValue(startValue, numberOfLoans);
+        BigDecimal actual = membership.getEndValue(startValue, numberOfLoans);
 
         BigDecimal expected = BigDecimal.valueOf(6400.0);
 
         assertEquals(expected, actual);
     }
 
-    @Test
     @DisplayName("Test if getEndValue returns the correct value for Gold membership")
-    void getEndValueWithGoldAndOneLoan() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"GOLD"}
+    )
+    void getEndValueWithGoldAndOneLoan(Membership membership) {
         BigDecimal startValue = BigDecimal.valueOf(1000);
         Integer numberOfLoans = 1;
-        BigDecimal actual = Membership.Gold.getEndValue(startValue, numberOfLoans);
+        BigDecimal actual = membership.getEndValue(startValue, numberOfLoans);
 
         BigDecimal expected = BigDecimal.valueOf(1200.0);
 
         assertEquals(expected, actual);
     }
 
-    @Test
     @DisplayName("Test if getEndValue returns the correct value for Gold membership and Client with two loans")
-    void getEndValueWithGoldAndTwoLoans() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"GOLD"}
+    )
+    void getEndValueWithGoldAndTwoLoans(Membership membership) {
         BigDecimal startValue = BigDecimal.valueOf(1000);
         Integer numberOfLoans = 2;
-        BigDecimal actual = Membership.Gold.getEndValue(startValue, numberOfLoans);
+        BigDecimal actual = membership.getEndValue(startValue, numberOfLoans);
 
         BigDecimal expected = BigDecimal.valueOf(1300.0);
 
         assertEquals(expected, actual);
     }
 
-    @Test
     @DisplayName("Test if fromString returns the correct value for Gold membership")
-    void fromStringWithGoldValue() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"GOLD"}
+    )
+    void fromStringWithGoldValue(Membership membership) {
         String value = "Gold";
         Membership actual = Membership.fromString(value);
 
-        Membership expected = Membership.Gold;
-
-        assertEquals(expected, actual);
+        assertEquals(membership, actual);
     }
 
-    @Test
     @DisplayName("Test if fromString returns the correct value for Silver membership")
-    void fromStringWithSilverValue() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"SILVER"}
+    )
+    void fromStringWithSilverValue(Membership membership) {
         String value = "Silver";
         Membership actual = Membership.fromString(value);
 
-        Membership expected = Membership.Silver;
-
-        assertEquals(expected, actual);
+        assertEquals(membership, actual);
     }
 
-    @Test
     @DisplayName("Test if fromString returns the correct value for Bronze membership")
-    void fromStringWithBronzeValue() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"BRONZE"}
+    )
+    void fromStringWithBronzeValue(Membership membership) {
         String value = "Bronze";
         Membership actual = Membership.fromString(value);
 
-        Membership expected = Membership.Bronze;
-
-        assertEquals(expected, actual);
+        assertEquals(membership, actual);
     }
 
     @Test
     @DisplayName("Test if fromString returns null for null value")
     void fromStringWithNullValue() {
-        String value = null;
+        String value = "null";
         Membership actual = Membership.fromString(value);
 
-        Membership expected = null;
-
-        assertEquals(expected, actual);
+        assertNull(actual);
     }
 
-    @Test
     @DisplayName("Test if fromString returns the correct value for Gold membership with uppercase value")
-    void fromUpperCaseStringWithGoldValue() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"GOLD"}
+    )
+    void fromUpperCaseStringWithGoldValue(Membership membership) {
         String value = "GOLD";
         Membership actual = Membership.fromString(value);
 
-        Membership expected = Membership.Gold;
-
-        assertEquals(expected, actual);
+        assertEquals(membership, actual);
     }
 
-    @Test
     @DisplayName("Test if fromString returns the correct value for Silver membership with uppercase value")
-    void fromUpperCaseStringWithSilverValue() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"SILVER"}
+    )
+    void fromUpperCaseStringWithSilverValue(Membership membership) {
         String value = "SILVER";
         Membership actual = Membership.fromString(value);
 
-        Membership expected = Membership.Silver;
-
-        assertEquals(expected, actual);
+        assertEquals(membership, actual);
     }
 
-    @Test
     @DisplayName("Test if fromString returns the correct value for Bronze membership with uppercase value")
-    void fromUpperCaseStringWithBronzeValue() {
+    @ParameterizedTest
+    @EnumSource(
+            value = Membership.class,
+            names = {"BRONZE"}
+    )
+    void fromUpperCaseStringWithBronzeValue(Membership membership) {
         String value = "BRONZE";
         Membership actual = Membership.fromString(value);
 
-        Membership expected = Membership.Bronze;
-
-        assertEquals(expected, actual);
+        assertEquals(membership, actual);
     }
 }
