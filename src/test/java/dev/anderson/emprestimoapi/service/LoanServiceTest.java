@@ -26,8 +26,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(properties = "spring.main.banner-mode=off")
 @AutoConfigureDataJpa
@@ -98,11 +97,11 @@ class LoanServiceTest {
 
         LoanDto loanDtoAfter = loanService.makeLoan(cpf, loanDto);
 
-        assert(loanDtoAfter.getCpfClient().equals(cpf));
-        assert(loanDtoAfter.getStartValue().equals(BigDecimal.valueOf(1000.00).setScale(2)));
-        assert(loanDtoAfter.getStartDate().equals(LocalDate.now()));
-        assert(loanDtoAfter.getEndDate().equals(LocalDate.now().plusMonths(10)));
-        assert(loanDtoAfter.getMembership().equals(Membership.GOLD));
+        assertEquals(loanDtoAfter.getCpfClient(), cpf);
+        assert (loanDtoAfter.getStartValue().equals(BigDecimal.valueOf(1000.00).setScale(2)));
+        assert (loanDtoAfter.getStartDate().equals(LocalDate.now()));
+        assert (loanDtoAfter.getEndDate().equals(LocalDate.now().plusMonths(10)));
+        assert (loanDtoAfter.getMembership().equals(Membership.GOLD));
     }
 
     @Test
@@ -159,10 +158,10 @@ class LoanServiceTest {
         LoanDto loanDtoAfter = loanService.makeLoan(cpf, loanDto);
         BigDecimal endValueExpected = BigDecimal.valueOf(120.000).setScale(3);
 
-        assert(loanDtoAfter.getEndValue().equals(endValueExpected));
-        assert(loanDtoAfter.getStartDate().equals(LocalDate.now()));
-        assert(loanDtoAfter.getEndDate().equals(LocalDate.now().plusMonths(10)));
-        assert(loanDtoAfter.getMembership().equals(Membership.GOLD));
+        assertEquals(loanDtoAfter.getEndValue(), endValueExpected);
+        assert (loanDtoAfter.getStartDate().equals(LocalDate.now()));
+        assert (loanDtoAfter.getEndDate().equals(LocalDate.now().plusMonths(10)));
+        assert (loanDtoAfter.getMembership().equals(Membership.GOLD));
     }
 
     @Test
@@ -289,10 +288,10 @@ class LoanServiceTest {
 
         LoanDto loanDtoAfter = loanService.getLoan(clientDto.getCpf(), loanEntity.getId());
 
-        assert(loanDtoAfter.getEndValue().equals(loanEntity.getEndValue()));
-        assert(loanDtoAfter.getStartDate().equals(loanEntity.getStartDate()));
-        assert(loanDtoAfter.getEndDate().equals(loanEntity.getEndDate()));
-        assert(loanDtoAfter.getMembership().equals(loanEntity.getMembership()));
+        assertEquals(loanDtoAfter.getEndValue(), loanEntity.getEndValue());
+        assertEquals(loanDtoAfter.getStartDate(), loanEntity.getStartDate());
+        assertEquals(loanDtoAfter.getEndDate(), loanEntity.getEndDate());
+        assertEquals(loanDtoAfter.getMembership(), loanEntity.getMembership());
     }
 
     @Test
@@ -333,7 +332,7 @@ class LoanServiceTest {
 
         List<LoanDto> loanDtos = loanService.getAllLoans(clientDto.getCpf());
 
-        assert(loanDtos.size() == 1);
+        assertEquals(loanDtos.size(), 1);
     }
 
     @Test
@@ -354,7 +353,7 @@ class LoanServiceTest {
 
         List<LoanDto> loanDtos = loanService.getAllLoans(clientDto.getCpf());
 
-        assert(loanDtos.size() == 0);
+        assertEquals(loanDtos.size(), 0);
     }
 
 }
