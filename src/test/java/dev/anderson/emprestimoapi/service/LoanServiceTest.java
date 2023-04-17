@@ -332,7 +332,7 @@ class LoanServiceTest {
 
         List<LoanDto> loanDtos = loanService.getAllLoans(clientDto.getCpf());
 
-        assertEquals(loanDtos.size(), 1);
+        assertEquals(1, loanDtos.size());
     }
 
     @Test
@@ -353,7 +353,7 @@ class LoanServiceTest {
 
         List<LoanDto> loanDtos = loanService.getAllLoans(clientDto.getCpf());
 
-        assertEquals(loanDtos.size(), 0);
+        assertEquals(0, loanDtos.size());
     }
 
 }
