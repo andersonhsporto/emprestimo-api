@@ -26,8 +26,8 @@ public class LoanService {
 
     private LoanMapper loanMapper;
 
-    public LoanDto makeLoan(String cpf, LoanDto loanDto) throws Exception {
-        if (clientRepository.existsByCpf(cpf) && cpf.equals(loanDto.getCPFClient())) {
+    public LoanDto makeLoan(String cpf, LoanDto loanDto) throws ClientNotFoundException, MaxLoanException {
+        if (clientRepository.existsByCpf(cpf) && cpf.equals(loanDto.getCpfClient())) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
             BigDecimal startValue = loanDto.getStartValue();
 
@@ -39,24 +39,26 @@ public class LoanService {
         throw new ClientNotFoundException(cpf);
     }
 
-    public void deleteLoan(String cpf, Long id) throws Exception {
+    public void deleteLoan(String cpf, Long id) throws ClientNotFoundException, LoanNotFoundException {
         if (clientRepository.existsByCpf(cpf)) {
-            if (loanRepository.existsByIdAndAndCPFClient(id, cpf)) {
+            if (loanRepository.existsByIdAndAndCpfClient(id, cpf)) {
                 ClientEntity clientEntity = clientRepository.findByCpf(cpf);
                 Optional<LoanEntity> loanEntity = loanRepository.findById(id);
 
-                clientEntity.removeLoan(loanEntity.get());
-                loanRepository.delete(loanEntity.get());
-                return;
+                if (loanEntity.isPresent()) {
+                    clientEntity.removeLoan(loanEntity.get());
+                    loanRepository.delete(loanEntity.get());
+                    return;
+                }
             }
             throw new LoanNotFoundException(cpf, id);
         }
         throw new ClientNotFoundException(cpf);
     }
 
-    public LoanDto getLoan(String cpf, Long id) throws Exception {
+    public LoanDto getLoan(String cpf, Long id) throws ClientNotFoundException, LoanNotFoundException {
         if (clientRepository.existsByCpf(cpf)) {
-            if (loanRepository.existsByIdAndAndCPFClient(id, cpf)) {
+            if (loanRepository.existsByIdAndAndCpfClient(id, cpf)) {
                 LoanEntity loanEntity = loanRepository.getReferenceById(id);
 
                 return loanMapper.toDto(loanEntity);
@@ -66,7 +68,7 @@ public class LoanService {
         throw new ClientNotFoundException(cpf);
     }
 
-    public List<LoanDto> getAllLoans(String cpf) throws Exception {
+    public List<LoanDto> getAllLoans(String cpf) throws ClientNotFoundException {
         if (clientRepository.existsByCpf(cpf)) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
 

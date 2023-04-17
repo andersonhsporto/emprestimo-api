@@ -63,11 +63,11 @@ class LoanServiceTest {
     void makeLoanOfClientThatDoesNotExist() {
         String cpf = "12345678901";
         LoanDto loanDto = new LoanDto();
-        loanDto.setCPFClient(cpf);
+        loanDto.setCpfClient(cpf);
         loanDto.setStartValue(BigDecimal.valueOf(1000.00).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
-        loanDto.setMembership(Membership.Gold);
+        loanDto.setMembership(Membership.GOLD);
 
         assertThrows(ClientNotFoundException.class, () -> loanService.makeLoan(cpf, loanDto));
     }
@@ -90,19 +90,19 @@ class LoanServiceTest {
         String cpf = "12345678901";
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCPFClient(cpf);
+        loanDto.setCpfClient(cpf);
         loanDto.setStartValue(BigDecimal.valueOf(1000.00).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
-        loanDto.setMembership(Membership.Gold);
+        loanDto.setMembership(Membership.GOLD);
 
         LoanDto loanDtoAfter = loanService.makeLoan(cpf, loanDto);
 
-        assert (loanDtoAfter.getCPFClient().equals(cpf));
-        assert (loanDtoAfter.getStartValue().equals(BigDecimal.valueOf(1000.00).setScale(2)));
-        assert (loanDtoAfter.getStartDate().equals(LocalDate.now()));
-        assert (loanDtoAfter.getEndDate().equals(LocalDate.now().plusMonths(10)));
-        assert (loanDtoAfter.getMembership().equals(Membership.Gold));
+        assert(loanDtoAfter.getCpfClient().equals(cpf));
+        assert(loanDtoAfter.getStartValue().equals(BigDecimal.valueOf(1000.00).setScale(2)));
+        assert(loanDtoAfter.getStartDate().equals(LocalDate.now()));
+        assert(loanDtoAfter.getEndDate().equals(LocalDate.now().plusMonths(10)));
+        assert(loanDtoAfter.getMembership().equals(Membership.GOLD));
     }
 
     @Test
@@ -123,11 +123,11 @@ class LoanServiceTest {
         String cpf = "12345678901";
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCPFClient(cpf);
+        loanDto.setCpfClient(cpf);
         loanDto.setStartValue(BigDecimal.valueOf(5000000000.00).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
-        loanDto.setMembership(Membership.Gold);
+        loanDto.setMembership(Membership.GOLD);
 
         assertThrows(MaxLoanException.class, () -> loanService.makeLoan(cpf, loanDto));
     }
@@ -150,19 +150,19 @@ class LoanServiceTest {
         String cpf = "12345678901";
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCPFClient(cpf);
+        loanDto.setCpfClient(cpf);
         loanDto.setStartValue(BigDecimal.valueOf(100).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
-        loanDto.setMembership(Membership.Gold);
+        loanDto.setMembership(Membership.GOLD);
 
         LoanDto loanDtoAfter = loanService.makeLoan(cpf, loanDto);
         BigDecimal endValueExpected = BigDecimal.valueOf(120.000).setScale(3);
 
-        assert (loanDtoAfter.getEndValue().equals(endValueExpected));
-        assert (loanDtoAfter.getStartDate().equals(LocalDate.now()));
-        assert (loanDtoAfter.getEndDate().equals(LocalDate.now().plusMonths(10)));
-        assert (loanDtoAfter.getMembership().equals(Membership.Gold));
+        assert(loanDtoAfter.getEndValue().equals(endValueExpected));
+        assert(loanDtoAfter.getStartDate().equals(LocalDate.now()));
+        assert(loanDtoAfter.getEndDate().equals(LocalDate.now().plusMonths(10)));
+        assert(loanDtoAfter.getMembership().equals(Membership.GOLD));
     }
 
     @Test
@@ -213,11 +213,11 @@ class LoanServiceTest {
         String cpf = "12345678901";
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCPFClient(cpf);
+        loanDto.setCpfClient(cpf);
         loanDto.setStartValue(BigDecimal.valueOf(5000000000.00).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
-        loanDto.setMembership(Membership.Gold);
+        loanDto.setMembership(Membership.GOLD);
 
         LoanEntity loanEntity = loanMapper.toModel(loanDto);
         loanRepository.save(loanEntity);
@@ -275,11 +275,11 @@ class LoanServiceTest {
         clientEntity.setLoans(new ArrayList<>());
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCPFClient(clientDto.getCpf());
+        loanDto.setCpfClient(clientDto.getCpf());
         loanDto.setStartValue(BigDecimal.valueOf(100.00).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
-        loanDto.setMembership(Membership.Gold);
+        loanDto.setMembership(Membership.GOLD);
 
         LoanEntity loanEntity = loanMapper.toModel(loanDto);
         loanEntity.setClient(clientEntity);
@@ -289,10 +289,10 @@ class LoanServiceTest {
 
         LoanDto loanDtoAfter = loanService.getLoan(clientDto.getCpf(), loanEntity.getId());
 
-        assert (loanDtoAfter.getEndValue().equals(loanEntity.getEndValue()));
-        assert (loanDtoAfter.getStartDate().equals(loanEntity.getStartDate()));
-        assert (loanDtoAfter.getEndDate().equals(loanEntity.getEndDate()));
-        assert (loanDtoAfter.getMembership().equals(loanEntity.getMembership()));
+        assert(loanDtoAfter.getEndValue().equals(loanEntity.getEndValue()));
+        assert(loanDtoAfter.getStartDate().equals(loanEntity.getStartDate()));
+        assert(loanDtoAfter.getEndDate().equals(loanEntity.getEndDate()));
+        assert(loanDtoAfter.getMembership().equals(loanEntity.getMembership()));
     }
 
     @Test
@@ -319,11 +319,11 @@ class LoanServiceTest {
         clientEntity.setLoans(new ArrayList<>());
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCPFClient(clientDto.getCpf());
+        loanDto.setCpfClient(clientDto.getCpf());
         loanDto.setStartValue(BigDecimal.valueOf(100.00).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
-        loanDto.setMembership(Membership.Gold);
+        loanDto.setMembership(Membership.GOLD);
 
         LoanEntity loanEntity = loanMapper.toModel(loanDto);
         loanEntity.setClient(clientEntity);
@@ -333,7 +333,7 @@ class LoanServiceTest {
 
         List<LoanDto> loanDtos = loanService.getAllLoans(clientDto.getCpf());
 
-        assert (loanDtos.size() == 1);
+        assert(loanDtos.size() == 1);
     }
 
     @Test
@@ -354,7 +354,7 @@ class LoanServiceTest {
 
         List<LoanDto> loanDtos = loanService.getAllLoans(clientDto.getCpf());
 
-        assert (loanDtos.size() == 0);
+        assert(loanDtos.size() == 0);
     }
 
 }
