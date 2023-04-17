@@ -17,10 +17,19 @@ Api REST para gerenciamento de clientes e empréstimos.
 
 O projeto foi desenvolvido utilizando o SonarQube para verificar a qualidade de código. O resultado do SonarQube pode ser visto abaixo:
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=andersonhsporto_emprestimo-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=andersonhsporto_emprestimo-api)
+    
+<img src="https://sonarcloud.io/api/project_badges/measure?project=andersonhsporto_emprestimo-api&metric=alert_status" 
+        alt="sonarcloud" 
+        align="left"
+        style="display: block; margin: 0 auto" />
 
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=andersonhsporto_emprestimo-api&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=andersonhsporto_emprestimo-api)
 
+<img src="https://user-images.githubusercontent.com/47704550/232556805-8822145b-e605-4dc8-a691-6cbebbf0f82d.png" 
+        alt="Picture" 
+        width="580 "
+        height="298" 
+        style="display: block; margin: 0 auto" />
 
 ## Instalação
 
