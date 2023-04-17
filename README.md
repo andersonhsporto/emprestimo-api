@@ -13,6 +13,14 @@ Api REST para gerenciamento de clientes e empréstimos.
 * [Docker](https://www.docker.com/) - Serviço de virtualização.
 * [H2 Database](https://www.h2database.com/html/main.html) - Banco de dados relacional escrito em Java que funciona em memória.
 
+## Qualidade de código
+
+O projeto foi desenvolvido utilizando o SonarQube para verificar a qualidade de código. O resultado do SonarQube pode ser visto abaixo:
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=andersonhsporto_emprestimo-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=andersonhsporto_emprestimo-api)
+
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=andersonhsporto_emprestimo-api&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=andersonhsporto_emprestimo-api)
+
 
 ## Instalação
 
