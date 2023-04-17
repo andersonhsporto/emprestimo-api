@@ -21,7 +21,7 @@ public class LoanEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String CPFClient;
+    private String cpfClient;
 
     private BigDecimal startValue;
 

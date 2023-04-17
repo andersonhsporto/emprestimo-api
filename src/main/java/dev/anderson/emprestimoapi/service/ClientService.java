@@ -85,7 +85,7 @@ public class ClientService {
         List<LoanEntity> loanEntityList = clientEntity.getLoans();
 
         for (LoanEntity loanEntity : loanEntityList) {
-            loanEntity.setCPFClient(cpf);
+            loanEntity.setCpfClient(cpf);
         }
     }
 
