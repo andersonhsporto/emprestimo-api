@@ -87,6 +87,8 @@ arquivo [pom.xml](https://github.com/andersonhsporto/emprestimo-api/blob/master/
 |     Mapstruct-processor      |     Responsável por gerar os mappers de conversão de objetos      |  1.4.2  |
 |      Spring Validation       |       Responsável por validar os objetos de entrada da API        |  2.7.9  |
 |           Junit 5            |           Biblioteca para criação de testes de unidade            |  5.8.1  |
+| Jacoco-maven-plugin          | Responsável por gerar o relatório de cobertura de testes do Sonar |  0.8.7  |
+
 ## Endpoints
 
 ### Clientes
@@ -149,7 +151,6 @@ Para facilitar o entendimento do projeto, segue abaixo um json de exemplo para c
 
 ```json
 {
-    "cpfCliente": "81599250004",
     "valorInicial": 1.00,
     "dataInicio": "2017-01-13",
     "dataFinal": "2017-01-13",
@@ -238,7 +239,6 @@ curl --location --request GET 'http://localhost:8080/api/v1/clientes/81599250004
 curl --location --request POST 'http://localhost:8080/api/v1/clientes/81599250004/emprestimos' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "cpfCliente": "81599250004",
     "valorInicial": 1.00,
     "dataInicio": "2017-01-13",
     "dataFinal": "2017-01-13",
