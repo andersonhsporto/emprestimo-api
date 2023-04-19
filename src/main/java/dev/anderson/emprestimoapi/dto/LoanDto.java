@@ -3,11 +3,9 @@ package dev.anderson.emprestimoapi.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.anderson.emprestimoapi.types.Membership;
 import lombok.Data;
-import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,10 +15,7 @@ public class LoanDto {
 
     private Long id;
 
-    @JsonProperty("cpfCliente")
-    @NotEmpty(message = "O campo 'cpfCliente' é obrigatório")
-    @CPF
-    private String cpfClient;
+    private String cpf;
 
     @JsonProperty("valorInicial")
     @NotNull(message = "O campo 'ValorInicial' é obrigatório")

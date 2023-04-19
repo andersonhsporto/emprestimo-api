@@ -62,7 +62,6 @@ class LoanServiceTest {
     void makeLoanOfClientThatDoesNotExist() {
         String cpf = "12345678901";
         LoanDto loanDto = new LoanDto();
-        loanDto.setCpfClient(cpf);
         loanDto.setStartValue(BigDecimal.valueOf(1000.00).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
@@ -89,7 +88,6 @@ class LoanServiceTest {
         String cpf = "12345678901";
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCpfClient(cpf);
         loanDto.setStartValue(BigDecimal.valueOf(1000.00).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
@@ -97,7 +95,7 @@ class LoanServiceTest {
 
         LoanDto loanDtoAfter = loanService.makeLoan(cpf, loanDto);
 
-        assertEquals(loanDtoAfter.getCpfClient(), cpf);
+        assertEquals(loanDtoAfter.getStartValue(), BigDecimal.valueOf(1000.00).setScale(2));
         assert (loanDtoAfter.getStartValue().equals(BigDecimal.valueOf(1000.00).setScale(2)));
         assert (loanDtoAfter.getStartDate().equals(LocalDate.now()));
         assert (loanDtoAfter.getEndDate().equals(LocalDate.now().plusMonths(10)));
@@ -122,7 +120,6 @@ class LoanServiceTest {
         String cpf = "12345678901";
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCpfClient(cpf);
         loanDto.setStartValue(BigDecimal.valueOf(5000000000.00).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
@@ -149,7 +146,6 @@ class LoanServiceTest {
         String cpf = "12345678901";
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCpfClient(cpf);
         loanDto.setStartValue(BigDecimal.valueOf(100).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
@@ -195,6 +191,7 @@ class LoanServiceTest {
     }
 
     @Test
+    @Transactional
     @DisplayName("Delete a loan of a client that does exist and has the loan")
     void deleteLoanThatExistOfClientThatExist() throws Exception {
         ClientDto clientDto = new ClientDto();
@@ -207,21 +204,24 @@ class LoanServiceTest {
         clientDto.setSalary(BigDecimal.valueOf(1000.00).setScale(2));
 
         ClientEntity clientEntity = clientMapper.toModel(clientDto);
-        clientRepository.save(clientEntity);
-
-        String cpf = "12345678901";
+        clientEntity.setLoans(new ArrayList<>());
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCpfClient(cpf);
-        loanDto.setStartValue(BigDecimal.valueOf(5000000000.00).setScale(2));
+        loanDto.setStartValue(BigDecimal.valueOf(100).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
         loanDto.setMembership(Membership.GOLD);
 
-        LoanEntity loanEntity = loanMapper.toModel(loanDto);
-        loanRepository.save(loanEntity);
+        LoanEntity loanEntity = loanMapper.toModel(loanDto, clientEntity.getCpf());
+        loanEntity.setCpfClient(clientEntity.getCpf());
+        loanEntity.setClient(clientEntity);
+        loanEntity.updateEndValue();
+        clientEntity.addLoan(loanEntity);
+        clientRepository.save(clientEntity);
 
+        String cpf = clientDto.getCpf();
         Long id = loanEntity.getId();
+
         loanService.deleteLoan(cpf, id);
 
         assertFalse(loanRepository.existsById(id));
@@ -274,14 +274,14 @@ class LoanServiceTest {
         clientEntity.setLoans(new ArrayList<>());
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCpfClient(clientDto.getCpf());
         loanDto.setStartValue(BigDecimal.valueOf(100.00).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
         loanDto.setMembership(Membership.GOLD);
 
-        LoanEntity loanEntity = loanMapper.toModel(loanDto);
+        LoanEntity loanEntity = loanMapper.toModel(loanDto, clientEntity.getCpf());
         loanEntity.setClient(clientEntity);
+        loanEntity.setCpfClient(clientEntity.getCpf());
         loanEntity.updateEndValue();
         clientEntity.addLoan(loanEntity);
         clientRepository.save(clientEntity);
@@ -318,13 +318,12 @@ class LoanServiceTest {
         clientEntity.setLoans(new ArrayList<>());
 
         LoanDto loanDto = new LoanDto();
-        loanDto.setCpfClient(clientDto.getCpf());
         loanDto.setStartValue(BigDecimal.valueOf(100.00).setScale(2));
         loanDto.setStartDate(LocalDate.now());
         loanDto.setEndDate(LocalDate.now().plusMonths(10));
         loanDto.setMembership(Membership.GOLD);
 
-        LoanEntity loanEntity = loanMapper.toModel(loanDto);
+        LoanEntity loanEntity = loanMapper.toModel(loanDto, clientEntity.getCpf());
         loanEntity.setClient(clientEntity);
         loanEntity.updateEndValue();
         clientEntity.addLoan(loanEntity);

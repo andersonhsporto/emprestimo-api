@@ -11,16 +11,17 @@ Api REST para gerenciamento de clientes e empréstimos.
 * [Apache Maven 3.8.6](https://maven.apache.org/) - Gerenciador de dependências.
 * [IntelliJ](https://www.jetbrains.com/idea/) - IDE para desenvolvimento.
 * [Docker](https://www.docker.com/) - Serviço de virtualização.
-* [H2 Database](https://www.h2database.com/html/main.html) - Banco de dados relacional escrito em Java que funciona em memória.
+* [H2 Database](https://www.h2database.com/html/main.html) - Banco de dados relacional escrito em Java que funciona em
+  memória.
 
 ## Qualidade de código
 
-O projeto foi desenvolvido utilizando o SonarQube para verificar a qualidade de código. O resultado do SonarQube pode ser visto abaixo:
+O projeto foi desenvolvido utilizando o SonarQube para verificar a qualidade de código. O resultado do SonarQube pode
+ser visto abaixo:
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=andersonhsporto_emprestimo-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=andersonhsporto_emprestimo-api)
 
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=andersonhsporto_emprestimo-api&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=andersonhsporto_emprestimo-api)
-
 
 ## Instalação
 
@@ -28,7 +29,8 @@ Para executar o projeto você pode utilizar a IDE de sua preferência, executar 
 
 ### IDE
 
-Para executar o projeto através da IDE, basta importar o projeto como um projeto Maven e executar a classe EmprestimoApiApplication.
+Para executar o projeto através da IDE, basta importar o projeto como um projeto Maven e executar a classe
+EmprestimoApiApplication.
 
 ### Maven
 
@@ -65,19 +67,20 @@ este comando irá executar os testes de unidade e exibirá o resultado no consol
 
 ## Dependências
 
-
 &emsp;As dependências são declaradas no
 arquivo [pom.xml](https://github.com/andersonhsporto/emprestimo-api/blob/master/pom.xml).
 
-|         Dependência          |                             Descrição                             | Versão  |
-|:----------------------------:|:-----------------------------------------------------------------:|:-------:|
-|          H2database          | Banco de dados relacional escrito em Java que funciona em memória | 2.1.214 |
-| Spring-boot-starter-data-jpa | Responsável por conectar a aplicação Spring com o banco de dados  |  2.7.9  |
-|   Spring-boot-starter-web    |               Responsável pela camada MVC do Spring               |  2.7.9  |
-|        Project-lombok        |          Biblioteca para reduzir a verbosidade do código          | 1.18.20 |
-|     Mapstruct-processor      |     Responsável por gerar os mappers de conversão de objetos      |  1.4.2  |
-|      Spring Validation       |       Responsável por validar os objetos de entrada da API        |  2.7.9  |
-|           Junit 5            |           Biblioteca para criação de testes de unidade            |  5.8.1  |
+|         Dependência          |                              Descrição                              | Versão  |
+|:----------------------------:|:-------------------------------------------------------------------:|:-------:|
+|          H2database          |  Banco de dados relacional escrito em Java que funciona em memória  | 2.1.214 |
+| Spring-boot-starter-data-jpa |  Responsável por conectar a aplicação Spring com o banco de dados   |  2.7.9  |
+|   Spring-boot-starter-web    |                Responsável pela camada MVC do Spring                |  2.7.9  |
+|        Project-lombok        |           Biblioteca para reduzir a verbosidade do código           | 1.18.20 |
+|     Mapstruct-processor      |      Responsável por gerar os mappers de conversão de objetos       |  1.4.2  |
+|      Spring Validation       |        Responsável por validar os objetos de entrada da API         |  2.7.9  |
+|           Junit 5            |            Biblioteca para criação de testes de unidade             |  5.8.1  |
+|     Jacoco-maven-plugin      | Responsável por gerar o relatório de cobertura de testes do projeto |  0.8.7  |
+
 ## Endpoints
 
 ### Clientes
@@ -103,13 +106,12 @@ arquivo [pom.xml](https://github.com/andersonhsporto/emprestimo-api/blob/master/
 
 ## Exemplos de requisições
 
-
 ### Postman
 
-Para facilitar o teste dos endpoints, foi criado uma collection no Postman com todos os endpoints e exemplos de requisições.
+Para facilitar o teste dos endpoints, foi criado uma collection no Postman com todos os endpoints e exemplos de
+requisições.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.postman.com/lively-resonance-591127/workspace/emprestimo-api/collection/19722349-38ae9e8a-c659-4caa-9be0-3d923a63320a?action=share&creator=19722349)
-
 
 ## Json de exemplo
 
@@ -119,41 +121,38 @@ Para facilitar o entendimento do projeto, segue abaixo um json de exemplo para c
 
 ```json
 {
-    "nome": "Frodo Bolseiro",
-    "cpf": "81599250004",
-    "telefone": "11999999999",
-    "rendimentoMensal": 100000,
-    "rua": "1 Bagshot Row, Condado",
-    "numero": 1123,
-    "cep": "04111-111"
+  "nome": "Frodo Bolseiro",
+  "cpf": "81599250004",
+  "telefone": "11999999999",
+  "rendimentoMensal": 100000,
+  "rua": "1 Bagshot Row, Condado",
+  "numero": 1123,
+  "cep": "04111-111"
 }
 ```
-
 
 * O campo CPF é utilizado como identificador do cliente, portanto não pode ser repetido e deve ser um CPF válido.
 * O campo telefone deve ser um número de telefone válido celular ou fixo ( 10 ou 11 dígitos) sem máscara.
 * O campo rendimentoMensal deve ser um número positivo.
 * O campo CEP deve ser um CEP válido no formato 00000-000.
 
-
 ### Empréstimo
 
 ```json
 {
-    "cpfCliente": "81599250004",
-    "valorInicial": 1.00,
-    "dataInicio": "2017-01-13",
-    "dataFinal": "2017-01-13",
-    "relacionamento": "GOLD"
+  "valorInicial": 1.00,
+  "dataInicio": "2017-01-13",
+  "dataFinal": "2017-01-13",
+  "relacionamento": "GOLD"
 }
 ```
 
-* O campo cpfCliente é utilizado para identificar o cliente que está realizando o empréstimo.
 * O campo valorInicial deve ser um número positivo.
 * O campo dataInicio deve ser uma data válida no formato yyyy-MM-dd.
 * O campo dataFinal deve ser uma data válida no formato yyyy-MM-dd.
-* O campo relacionamento descreve o relacionamento do cliente com a empresa este é utilizado para calcular o valor final do empréstimo. 
-Os valores possíveis são: OURO, PRATA e BRONZE ou suas respectivas traduções em inglês (GOLD, SILVER e BRONZE).
+* O campo relacionamento descreve o relacionamento do cliente com a empresa este é utilizado para calcular o valor final
+  do empréstimo.
+  Os valores possíveis são: OURO, PRATA e BRONZE ou suas respectivas traduções em inglês (GOLD, SILVER e BRONZE).
 
 ### Clientes
 
@@ -229,7 +228,6 @@ curl --location --request GET 'http://localhost:8080/api/v1/clientes/81599250004
 curl --location --request POST 'http://localhost:8080/api/v1/clientes/81599250004/emprestimos' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "cpfCliente": "81599250004",
     "valorInicial": 1.00,
     "dataInicio": "2017-01-13",
     "dataFinal": "2017-01-13",
@@ -245,7 +243,8 @@ curl --location --request DELETE 'http://localhost:8080/api/v1/clientes/81599250
 
 ### Banco de dados
 
-O banco de dados utilizado foi o H2, que é um banco de dados em memória. Para acessar o console do banco de dados, basta acessar a url http://localhost:8080/h2-console e inserir as informações abaixo:
+O banco de dados utilizado foi o H2, que é um banco de dados em memória. Para acessar o console do banco de dados, basta
+acessar a url http://localhost:8080/h2-console e inserir as informações abaixo:
 
 |    Campo     |         Valor          |
 |:------------:|:----------------------:|
@@ -256,11 +255,12 @@ O banco de dados utilizado foi o H2, que é um banco de dados em memória. Para 
 
 #### Relacionamento entre as entidades
 
-O relacionamento entre as entidades Cliente e Empréstimo é de um para muitos, ou seja, um cliente pode ter vários empréstimos, mas um empréstimo só pode ter um cliente.
-Além disso, o relacionamento entre as entidades Cliente e Endereço é de um para um, ou seja, um cliente só pode ter um endereço.
+O relacionamento entre as entidades Cliente e Empréstimo é de um para muitos, ou seja, um cliente pode ter vários
+empréstimos, mas um empréstimo só pode ter um cliente.
+Além disso, o relacionamento entre as entidades Cliente e Endereço é de um para um, ou seja, um cliente só pode ter um
+endereço.
 
 ![Untitled](https://user-images.githubusercontent.com/47704550/230756413-11ceaabd-5297-4563-b8ff-8a719bf5a70a.png)
-
 
 ## Informações de contato
 

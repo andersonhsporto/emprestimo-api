@@ -27,7 +27,7 @@ public class LoanService {
     private LoanMapper loanMapper;
 
     public LoanDto makeLoan(String cpf, LoanDto loanDto) throws ClientNotFoundException, MaxLoanException {
-        if (clientRepository.existsByCpf(cpf) && cpf.equals(loanDto.getCpfClient())) {
+        if (clientRepository.existsByCpf(cpf)) {
             ClientEntity clientEntity = clientRepository.findByCpf(cpf);
             BigDecimal startValue = loanDto.getStartValue();
 
@@ -78,7 +78,7 @@ public class LoanService {
     }
 
     private LoanDto persistLoan(ClientEntity clientEntity, LoanDto loanDto) {
-        LoanEntity loanEntity = loanMapper.toModel(loanDto);
+        LoanEntity loanEntity = loanMapper.toModel(loanDto, clientEntity.getCpf());
 
         loanEntity.setClient(clientEntity);
         loanEntity.updateEndValue();

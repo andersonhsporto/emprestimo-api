@@ -15,9 +15,12 @@ public interface LoanMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "endValue", ignore = true)
-    LoanEntity toModel(LoanDto loanDto);
+    @Mapping(target = "cpfClient", source = "cpf")
+    LoanEntity toModel(LoanDto loanDto, String cpf);
 
+    @Mapping(target = "cpf", source = "cpfClient")
     LoanDto toDto(LoanEntity loanEntity);
 
+    @Mapping(target = "cpf", source = "cpfClient")
     List<LoanDto> toDtoList(List<LoanEntity> loanEntityList);
 }
