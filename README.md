@@ -158,7 +158,6 @@ Para facilitar o entendimento do projeto, segue abaixo um json de exemplo para c
 }
 ```
 
-* O campo cpfCliente é utilizado para identificar o cliente que está realizando o empréstimo.
 * O campo valorInicial deve ser um número positivo.
 * O campo dataInicio deve ser uma data válida no formato yyyy-MM-dd.
 * O campo dataFinal deve ser uma data válida no formato yyyy-MM-dd.
