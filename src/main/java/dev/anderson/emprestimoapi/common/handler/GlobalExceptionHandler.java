@@ -1,9 +1,9 @@
-package dev.anderson.emprestimoapi.exceptions.handler;
+package dev.anderson.emprestimoapi.common.handler;
 
-import dev.anderson.emprestimoapi.exceptions.ClientDuplicatedException;
-import dev.anderson.emprestimoapi.exceptions.ClientNotFoundException;
-import dev.anderson.emprestimoapi.exceptions.LoanNotFoundException;
-import dev.anderson.emprestimoapi.exceptions.MaxLoanException;
+import dev.anderson.emprestimoapi.common.exceptions.ClientDuplicatedException;
+import dev.anderson.emprestimoapi.common.exceptions.ClientNotFoundException;
+import dev.anderson.emprestimoapi.common.exceptions.LoanNotFoundException;
+import dev.anderson.emprestimoapi.common.exceptions.MaxLoanException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

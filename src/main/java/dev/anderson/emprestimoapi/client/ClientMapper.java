@@ -1,7 +1,5 @@
-package dev.anderson.emprestimoapi.mapper;
+package dev.anderson.emprestimoapi.client;
 
-import dev.anderson.emprestimoapi.dto.ClientDto;
-import dev.anderson.emprestimoapi.entities.ClientEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

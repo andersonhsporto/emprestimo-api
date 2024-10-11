@@ -1,6 +1,7 @@
-package dev.anderson.emprestimoapi.entities;
+package dev.anderson.emprestimoapi.loan;
 
-import dev.anderson.emprestimoapi.types.Membership;
+import dev.anderson.emprestimoapi.client.ClientEntity;
+import dev.anderson.emprestimoapi.common.types.Membership;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

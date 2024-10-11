@@ -1,12 +1,8 @@
-package dev.anderson.emprestimoapi.service;
+package dev.anderson.emprestimoapi.client;
 
-import dev.anderson.emprestimoapi.dto.ClientDto;
-import dev.anderson.emprestimoapi.entities.ClientEntity;
-import dev.anderson.emprestimoapi.entities.LoanEntity;
-import dev.anderson.emprestimoapi.exceptions.ClientDuplicatedException;
-import dev.anderson.emprestimoapi.exceptions.ClientNotFoundException;
-import dev.anderson.emprestimoapi.mapper.ClientMapper;
-import dev.anderson.emprestimoapi.repositories.ClientRepository;
+import dev.anderson.emprestimoapi.loan.LoanEntity;
+import dev.anderson.emprestimoapi.common.exceptions.ClientDuplicatedException;
+import dev.anderson.emprestimoapi.common.exceptions.ClientNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

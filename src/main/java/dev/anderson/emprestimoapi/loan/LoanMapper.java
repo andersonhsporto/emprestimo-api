@@ -1,7 +1,5 @@
-package dev.anderson.emprestimoapi.mapper;
+package dev.anderson.emprestimoapi.loan;
 
-import dev.anderson.emprestimoapi.dto.LoanDto;
-import dev.anderson.emprestimoapi.entities.LoanEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

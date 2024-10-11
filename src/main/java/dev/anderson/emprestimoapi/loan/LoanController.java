@@ -1,10 +1,9 @@
-package dev.anderson.emprestimoapi.controller;
+package dev.anderson.emprestimoapi.loan;
 
-import dev.anderson.emprestimoapi.dto.LoanDto;
-import dev.anderson.emprestimoapi.exceptions.ClientNotFoundException;
-import dev.anderson.emprestimoapi.exceptions.LoanNotFoundException;
-import dev.anderson.emprestimoapi.exceptions.MaxLoanException;
-import dev.anderson.emprestimoapi.service.LoanService;
+import dev.anderson.emprestimoapi.common.exceptions.ClientNotFoundException;
+import dev.anderson.emprestimoapi.common.exceptions.LoanNotFoundException;
+import dev.anderson.emprestimoapi.common.exceptions.MaxLoanException;
+import dev.anderson.emprestimoapi.common.handler.GlobalExceptionHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +13,9 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/clientes/{cpf}/emprestimos")
+@RequestMapping("/clientes/{cpf}/emprestimos")
 @AllArgsConstructor
-public class LoanController {
+public class LoanController extends GlobalExceptionHandler {
 
     private LoanService loanService;
 

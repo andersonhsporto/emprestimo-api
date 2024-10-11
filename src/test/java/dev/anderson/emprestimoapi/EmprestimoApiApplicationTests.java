@@ -1,7 +1,7 @@
 package dev.anderson.emprestimoapi;
 
-import dev.anderson.emprestimoapi.controller.ClientController;
-import dev.anderson.emprestimoapi.controller.LoanController;
+import dev.anderson.emprestimoapi.client.ClientController;
+import dev.anderson.emprestimoapi.loan.LoanController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

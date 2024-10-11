@@ -1,4 +1,4 @@
-package dev.anderson.emprestimoapi.types;
+package dev.anderson.emprestimoapi.common.types;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

@@ -1,4 +1,4 @@
-package dev.anderson.emprestimoapi.dto;
+package dev.anderson.emprestimoapi.client;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

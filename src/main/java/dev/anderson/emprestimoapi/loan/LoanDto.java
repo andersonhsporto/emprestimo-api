@@ -1,7 +1,7 @@
-package dev.anderson.emprestimoapi.dto;
+package dev.anderson.emprestimoapi.loan;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.anderson.emprestimoapi.types.Membership;
+import dev.anderson.emprestimoapi.common.types.Membership;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 

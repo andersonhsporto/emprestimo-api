@@ -1,11 +1,12 @@
 package dev.anderson.emprestimoapi.service;
 
-import dev.anderson.emprestimoapi.dto.ClientDto;
-import dev.anderson.emprestimoapi.entities.ClientEntity;
-import dev.anderson.emprestimoapi.exceptions.ClientDuplicatedException;
-import dev.anderson.emprestimoapi.exceptions.ClientNotFoundException;
-import dev.anderson.emprestimoapi.mapper.ClientMapper;
-import dev.anderson.emprestimoapi.repositories.ClientRepository;
+import dev.anderson.emprestimoapi.client.ClientService;
+import dev.anderson.emprestimoapi.client.ClientDto;
+import dev.anderson.emprestimoapi.client.ClientEntity;
+import dev.anderson.emprestimoapi.common.exceptions.ClientDuplicatedException;
+import dev.anderson.emprestimoapi.common.exceptions.ClientNotFoundException;
+import dev.anderson.emprestimoapi.client.ClientMapper;
+import dev.anderson.emprestimoapi.client.ClientRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

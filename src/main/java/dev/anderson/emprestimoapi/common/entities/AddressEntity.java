@@ -1,4 +1,4 @@
-package dev.anderson.emprestimoapi.entities;
+package dev.anderson.emprestimoapi.common.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
