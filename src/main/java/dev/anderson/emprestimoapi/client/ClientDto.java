@@ -4,19 +4,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Data
 public class ClientDto {
 
     @JsonProperty("nome")
+    @NotNull(message = "'nome' nao pode ser nulo")
+    @NotEmpty(message = "'nome' nao pode ser vazio")
     private String name;
 
     @JsonProperty("cpf")
     @CPF(message = "CPF inválido")
+    @NotNull(message = "'cpf' nao pode ser nulo")
+    @NotEmpty(message = "'cpf' nao pode ser vazio")
     private String cpf;
 
     @JsonProperty("telefone")
@@ -25,6 +27,8 @@ public class ClientDto {
     private String telephone;
 
     @JsonProperty("rendimentoMensal")
+    @NotNull(message = "'rendimentoMensal' nao pode ser nulo")
+    @Min(value = 1, message = "O campo 'rendimentoMensal' deve ser maior que 0")
     @DecimalMin(value = "0.0", inclusive = false, message = "O campo 'rendimentoMensal' deve ser maior que 0")
     private BigDecimal salary;
 
