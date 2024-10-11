@@ -2,7 +2,6 @@ package dev.anderson.emprestimoapi.client;
 
 import dev.anderson.emprestimoapi.common.exceptions.ClientDuplicatedException;
 import dev.anderson.emprestimoapi.common.exceptions.ClientNotFoundException;
-import dev.anderson.emprestimoapi.common.handler.GlobalExceptionHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequestMapping("/clientes")
 @AllArgsConstructor
-public class ClientController extends GlobalExceptionHandler {
+public class ClientController {
 
     private ClientService clientService;
 
